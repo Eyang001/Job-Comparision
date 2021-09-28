@@ -1,11 +1,13 @@
 
-##Design 1##  
+**Design 1**  
 
 
-##Design 2##  
+**Design 2**  
 
-##Team Desing##  
 
-##Summary##  
+**Team Design**
+
+
+**Summary**  
 
 
