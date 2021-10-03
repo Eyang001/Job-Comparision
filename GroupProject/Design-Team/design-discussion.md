@@ -1,6 +1,6 @@
 
 **Design 1 (Val)**  
-
+![Val's design](./images/vpintea3-design.png)
 Pros:
 * Contains main entry point into program (part of requirements doc)
 
@@ -25,7 +25,7 @@ Cons:
 
 
 **Design 3 (Zhaoran)**
-
+![Zhaoran's design](./images/zyang625-design.png)
 Pros:
 * Uses Interface to achieve total abstraction
 * Only updates weightedSum (i.e. score) when comparison is called, therefore saves on unnecessary computing time
