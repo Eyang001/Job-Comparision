@@ -1,6 +1,6 @@
 
 **Design 1 (Val)**  
-
+![Val's design](./images/vpintea3-design.png)
 Pros:
 * Contains main entry point into program (part of requirements doc)
 
@@ -11,7 +11,7 @@ Cons:
 
 
 **Design 2 (Robert)**
-
+![Robert's design](./images/raames3-design.png)
 Pros:
 * Contains main entry point into program (part of requirements doc)
 * Abstract class of Job, which CurrentJobDetails and JobOffers inherits from, allows for easy modifiability in the future.
@@ -25,7 +25,7 @@ Cons:
 
 
 **Design 3 (Zhaoran)**
-
+![Zhaoran's design](./images/zyang625-design.png)
 Pros:
 * Uses Interface to achieve total abstraction
 * Only updates weightedSum (i.e. score) when comparison is called, therefore saves on unnecessary computing time
@@ -37,7 +37,7 @@ Cons:
 
 
 **Design 4 (Arthur)**
-
+![Arthur's design](./images/alacey7-design.PNG)
 Pros:
 * Separate Location class allows for cost of living to be consistently maintained for job locations. I.e. The Cost of Living (COL) Index does not need to be updated for every job in a given location, but rather, the COL is updated for the location object.
 * Supports Model-View-Controller (MVC) Design paradigm 
@@ -50,7 +50,7 @@ Cons:
 
 
 **Team Design**
-
+![Team's design](./images/team-design.png)
 We've selected Arthur's updated UML design.  
 
 Some commonalities to the other proposed designs we identified are:  
