@@ -26,7 +26,7 @@
 ## 2 Architectural Design
 
 ### 2.1 Component Diagram
-
+![Component Diagram](./images/ComponentDiagram.png)
 
 * We used a component diagram inspired by a MVC framework
 * The “View” holds the UI components which will request a model update from the “Controller”
@@ -45,10 +45,15 @@ Reference: [Component Diagrams](https://stackoverflow.com/questions/52807195/whi
 
 ### 3.1 Class Diagram
 
+![Class Diagram](./images/ClassDiagram.png)
+
 ### 3.2 Other Diagrams
 
 * While we understand there is value in adding further diagrams to elucidate our system, our requirements are simple enough that we have decided to omit behavioral diagrams. The benefit of inclusion does not outweigh the additional costs associated with developing these diagrams.
 
 ## 4 User Interface Design
-
+![UI](./images/AdjustComparisonWeights-UI.png)
+![UI](./images/EnterCurrentJob-UI.png)
+![UI](./images/EnterJobOffer-UI.png)
+![UI](./images/CompareJobOffers-UI.png)
 
