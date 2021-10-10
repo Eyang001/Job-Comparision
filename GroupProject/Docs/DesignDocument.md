@@ -52,8 +52,9 @@ Reference: [Component Diagrams](https://stackoverflow.com/questions/52807195/whi
 * While we understand there is value in adding further diagrams to elucidate our system, our requirements are simple enough that we have decided to omit behavioral diagrams. The benefit of inclusion does not outweigh the additional costs associated with developing these diagrams.
 
 ## 4 User Interface Design
-![UI](./images/AdjustComparisonWeights-UI.png)
+![UI](./images/MainMenu-UI.png)
 ![UI](./images/EnterCurrentJob-UI.png)
 ![UI](./images/EnterJobOffer-UI.png)
+![UI](./images/AdjustComparisonWeights-UI.png)
 ![UI](./images/CompareJobOffers-UI.png)
 
