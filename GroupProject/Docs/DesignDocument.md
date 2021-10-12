@@ -1,4 +1,4 @@
-# Design Document
+# Design Document (Version 2: Updated Section 4 UI graphical mockups)
 
 **Author**: Team100
 
