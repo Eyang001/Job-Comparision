@@ -55,12 +55,15 @@ public class EnterJobOfferActivity extends AppCompatActivity {
 
     }
     public void enterAnotherOffer(View view){
-        Intent intent = new Intent(this.getApplicationContext(), EnterJobOfferActivity.class);
+        Intent intent = new Intent(this, EnterJobOfferActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     public void compareToCurrentJob(View view){
-
+        Intent intent = new Intent(this, CompareOffersActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     public void mainMenu(View view){
