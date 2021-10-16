@@ -1,5 +1,6 @@
 package edu.gatech.seclass.jobcompare6300;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
@@ -41,32 +42,50 @@ public class Controller {
 
     }
 
-    public void editCurrentJob(View view){
-        //Intent intent = new Intent(this, enterCurrentJobActivity.class);
-        //startActivity(intent);
+    public Job getCurrentJob(){return jobOffers.getCurrentJob();}
 
-        /* display activity_enter_current_job
-        save current job's details in jobOffers if save button is selected, otherwise cancel
-        return to main menu
-         */
+    public Location getLocationByCityState(String city, String state){
+        for (Location l: locations){
+            if(l.getCity() == city && l.getState()==state) return l;
+        }
+        return null;
     }
 
-    public void enterJobOffer(View view){
-        /* display activity_enter_job_offer
-        save/cancel
-        handle appropriate follow-on action
-         */
+    public void editCurrentJob(String title, String company, String city, String state, int colIndex,
+                        int salary, int bonus, int teleworkDays, int leaveDays, int gymAllowance){
+        Job job = jobOffers.getCurrentJob();
+        this.addLocation(city, state, colIndex);
+        Location location = getLocationByCityState(city, state);
+        if(job==null){
+            job = new Job(title, company, location, salary, bonus, teleworkDays, leaveDays, gymAllowance);
+        }
+        else{
+            job.setTitle(title);
+            job.setCompany(company);
+            job.setLocation(location);
+            job.setSalary(salary);
+            job.setBonus(bonus);
+            job.setTeleworkDays(teleworkDays);
+            job.setLeaveDays(leaveDays);
+            job.setGymAllowance(gymAllowance);
+        }
+        jobOffers.addOffer(job, this.weights, true);
     }
 
-    public void adjustWeights(View view){
-        /* display activity_adjust_comparison_weights
-        save/cancel then return to main menu
-         */
+    public void enterJobOffer(String title, String company, String city, String state, int colIndex, int salary, int bonus, int teleworkDays, int leaveDays, int gymAllowance){
+
+    }
+
+    public void adjustWeights(int salaryWeight, int bonusWeight, int teleWeight, int leaveWeight, int gymWeight) {
+        weights.setYearlySalary(salaryWeight);
+        weights.setYearlyBonus(bonusWeight);
+        weights.setTeleDays(teleWeight);
+        weights.setLeaveDays(leaveWeight);
+        weights.setGymAllowance(gymWeight);
     }
 
     public void compareOffers(View view){
         /* display activity_compare_jobs
-
          */
     }
 
