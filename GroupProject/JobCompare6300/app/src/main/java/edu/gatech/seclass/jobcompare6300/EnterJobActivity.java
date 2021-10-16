@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class EnterJobActivity extends AppCompatActivity {
     private Controller controller;
@@ -26,9 +27,6 @@ public class EnterJobActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_current_job);
 
-        Intent intent=this.getIntent();
-        controller = (Controller) intent.getExtras().get("Controller");
-
         EditText titleField = (EditText) findViewById(R.id.titleField);
         EditText companyField = (EditText) findViewById(R.id.companyField);
         EditText cityField = (EditText) findViewById(R.id.cityField);
@@ -40,19 +38,27 @@ public class EnterJobActivity extends AppCompatActivity {
         EditText leaveField = (EditText) findViewById(R.id.leaveField);
         EditText gymField = (EditText) findViewById(R.id.gymField);
 
-        //fill in fields if current job is saved
-        if(controller.getCurrentJob() != null){
-            job=controller.getCurrentJob();
-            titleField.setText(job.getTitle());
-            companyField.setText(job.getCompany());
-            cityField.setText(job.getLocationCity());
-            stateField.setText(job.getLocationState());
-            colField.setText(job.getLocationCostOfLivingIndex());
-            salaryField.setText(job.getSalary());
-            bonusField.setText(job.getBonus());
-            teleworkField.setText(job.getTeleworkDays());
-            leaveField.setText(job.getLeaveDays());
-            gymField.setText(job.getGymAllowance());
+        try{
+            Intent intent = getIntent();
+            controller = (Controller) intent.getExtras().get("Controller");
+            //fill in fields if current job is saved
+            if(controller.getCurrentJob() != null){
+                job=controller.getCurrentJob();
+                titleField.setText(job.getTitle());
+                companyField.setText(job.getCompany());
+                cityField.setText(job.getLocationCity());
+                stateField.setText(job.getLocationState());
+                colField.setText(job.getLocationCostOfLivingIndex());
+                salaryField.setText(job.getSalary());
+                bonusField.setText(job.getBonus());
+                teleworkField.setText(job.getTeleworkDays());
+                leaveField.setText(job.getLeaveDays());
+                gymField.setText(job.getGymAllowance());
+            }
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Failed to Initialize Controller", Toast.LENGTH_LONG);
+            System.out.println(e);
         }
     }
 
@@ -70,19 +76,21 @@ public class EnterJobActivity extends AppCompatActivity {
         int gymAllowance = Integer.parseInt(gymField.getText().toString());
 
         if(validateFields(view)) {
+            Toast.makeText(getApplicationContext(),"Updating current job...", Toast.LENGTH_LONG);
             controller.editCurrentJob(title, company, city, state, colIndex, salary, bonus, teleworkDays, leaveDays, gymAllowance);
             this.finish();
         }
         else{
-            return;
+            
         }
+
     }
 
     public void cancel(View view){
         this.finish();
     }
 
-    private boolean validateFields(View view){
+    public boolean validateFields(View view){
         boolean allFieldsValid=true;
         String title = titleField.getText().toString();
         String company = companyField.getText().toString();

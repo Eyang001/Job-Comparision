@@ -277,6 +277,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="167dp"
                 android:layout_weight="1"
+                android:onClick="saveJob"
                 android:text="Save" />
 
             <Button
@@ -284,6 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="167dp"
                 android:layout_weight="1"
+                android:onClick="cancel"
                 android:text="Cancel" />
         </LinearLayout>
     </LinearLayout>
