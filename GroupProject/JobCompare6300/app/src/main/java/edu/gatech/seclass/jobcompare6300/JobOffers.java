@@ -1,7 +1,10 @@
 package edu.gatech.seclass.jobcompare6300;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.LinkedList;
 
@@ -27,6 +30,7 @@ public class JobOffers {
         update the value in ranked offers accordingly
         call sortJobOffers
          */
+
         //if (!dirtyScores) {return};
 
         /* update score for each job offer */
@@ -35,21 +39,27 @@ public class JobOffers {
             rankedJobOffers.put(pair.getKey(),newScore);
         }
 
-        /* sort jobOffers */
-
-
+        /* sort and update rankedJobOffers and rankedJobOffers */
+        sortJobOffers();
         //markScoresClean();
     }
 
     private void sortJobOffers(){
-        /* purge sortedJobOffers
-        sort rankedJobOffers
-        add sorted results back to sortedJobOffers
-         */
+        /* purge sortedJobOffers */
+        sortedJobOffers.clear();
+
+        /* sort rankedJobOffers */
+        List<Map.Entry<Job, Float>> list = new LinkedList<>(rankedJobOffers.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Job, Float>>()
+            {
+            public int compare(Map.Entry<Job, Float> o1, Map.Entry<Job, Float> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+
+        /* add sorted results back to sortedJobOffers */
         for(Map.Entry<Job, Float> pair : rankedJobOffers.entrySet()){
-            pair.getKey();
-            pair.getValue();
-            
+            sortedJobOffers.add(pair.getKey());
         }
     }
 
@@ -65,6 +75,7 @@ public class JobOffers {
     }
 
     public void addOffer(Job job, ComparisonWeights weights, boolean isCurrentJob){
+        /* if currentJob does not exist, add to index 0 */
         if (isCurrentJob && jobOffers.get(0) == null) {jobOffers.add(0,job); }
         else if (!isCurrentJob){
             if (jobOffers.get(0) != null) {
@@ -72,18 +83,21 @@ public class JobOffers {
             } else {
                 jobOffers.add(jobOffers.size() - 1, job);
             }
+
+            //calculate score and add to rankedJobOffers
             float score = calculateScore(job, weights);
             rankedJobOffers.put(job, score);
         }
     }
 
     public float calculateScore(Job job, ComparisonWeights weights){
-        int sumWeights = yearlySalary + yearlyBonus + teleDays + leave + gym;
-        float yearlySalaryWeight = weights.getyearlySalary()/sumWeights;
-        float yearlyBonusWeight = weights.getyearlyBonus()/sumWeights;
-        float teleDaysWeight = weights.getteleDays()/sumWeights;
-        float leaveWeight = weights.getleaveDays()/sumWeights;
-        float gymWeight = weights.getGymAllowance()/sumWeights;
+        int sumWeights = weights.getyearlySalary() + weights.getyearlyBonus() + weights.getteleDays()
+                + weights.getleaveDays() + weights.getGymAllowance();
+        float yearlySalaryWeight = (float) weights.getyearlySalary()/sumWeights;
+        float yearlyBonusWeight = (float) weights.getyearlyBonus()/sumWeights;
+        float teleDaysWeight = (float) weights.getteleDays()/sumWeights;
+        float leaveWeight = (float) weights.getleaveDays()/sumWeights;
+        float gymWeight = (float) weights.getGymAllowance()/sumWeights;
 
         float AYS = job.getSalary() * job.getLocationCostOfLivingIndex();
         float AYB = job.getBonus() * job.getLocationCostOfLivingIndex();
