@@ -21,10 +21,6 @@ public class JobOffers {
         dirtyScores = false;
     }
 
-    public float getJobScore(Job job){
-        return rankedJobOffers.get(job);
-    }
-
     public void updateJobScores(ComparisonWeights weights){
         /* for every job in jobOffers, recompute the job score
         update the value in ranked offers accordingly
@@ -35,7 +31,7 @@ public class JobOffers {
 
         /* update score for each job offer */
         for(Map.Entry<Job, Float> pair : rankedJobOffers.entrySet()){
-            float newScore = calculateScore(pair.getKey(),weights);
+            float newScore = pair.getKey().getJobScore(weights);
             rankedJobOffers.put(pair.getKey(),newScore);
         }
 
@@ -70,40 +66,41 @@ public class JobOffers {
         this.dirtyScores=false;
     }
 
-    public Job getCurrentJob(Job job){
-        return this.jobOffers.get(0);
-    }
-
     public void addOffer(Job job, ComparisonWeights weights, boolean isCurrentJob){
         /* if currentJob does not exist, add to index 0 */
-        if (isCurrentJob && jobOffers.get(0) == null) {jobOffers.add(0,job); }
+        if (isCurrentJob && getCurrentJob() == null) {jobOffers.add(0,job); }
         else if (!isCurrentJob){
-            if (jobOffers.get(0) != null) {
+            if (getCurrentJob() != null) {
                 jobOffers.add(jobOffers.size(), job);
             } else {
-                jobOffers.add(jobOffers.size() - 1, job);
+                jobOffers.add(jobOffers.size() + 1, job);
             }
 
             //calculate score and add to rankedJobOffers
-            float score = calculateScore(job, weights);
+            float score = job.getJobScore(weights);
             rankedJobOffers.put(job, score);
         }
     }
 
-    public float calculateScore(Job job, ComparisonWeights weights){
-        int sumWeights = weights.getyearlySalary() + weights.getyearlyBonus() + weights.getteleDays()
-                + weights.getleaveDays() + weights.getGymAllowance();
-        float yearlySalaryWeight = (float) weights.getyearlySalary()/sumWeights;
-        float yearlyBonusWeight = (float) weights.getyearlyBonus()/sumWeights;
-        float teleDaysWeight = (float) weights.getteleDays()/sumWeights;
-        float leaveWeight = (float) weights.getleaveDays()/sumWeights;
-        float gymWeight = (float) weights.getGymAllowance()/sumWeights;
 
-        float AYS = job.getSalary() * job.getLocationCostOfLivingIndex();
-        float AYB = job.getBonus() * job.getLocationCostOfLivingIndex();
-        return  AYS * yearlySalaryWeight + AYB * yearlyBonusWeight
-                + job.getGymAllowance() * gymWeight + (job.getLeaveDays() * AYS / 260) * leaveWeight
-                + ((260 - 52 * job.getTeleworkDays()) * (AYS / 260) / 8) * teleDaysWeight;
+    public Job getCurrentJob(){
+        return this.jobOffers.get(0);
+    }
+
+    public Job getLastSavedJobOffer(){
+        if(getCurrentJob() == null){
+            return this.jobOffers.get(this.jobOffers.size());
+        } else {
+            return this.jobOffers.get(this.jobOffers.size()-1);
+        }
+    }
+
+    public ArrayList<Job> getJobOffers(){
+        return this.jobOffers;
+    }
+
+    public float getJobScore(Job job){
+        return this.rankedJobOffers.get(job);
     }
 
 }
