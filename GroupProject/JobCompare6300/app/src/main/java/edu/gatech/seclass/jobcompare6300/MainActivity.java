@@ -14,26 +14,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
         controller = new Controller();
     }
 
     //https://developer.android.com/training/basics/firstapp/starting-activity
     public void editCurrentJob(View view){
-        controller.editCurrentJob(view);
-        //Intent intent = new Intent(this, )
+        Intent intent = new Intent(); //start enter current job activity, pass it controller
+
     }
 
     public void enterJobOffer(View view){
-        controller.enterJobOffer(view);
+        //controller.enterJobOffer(view);
     }
 
     public void adjustComparisonWeights(View view){
-        controller.adjustWeights(view);
+        //controller.adjustWeights(view);
     }
 
     public void compareJobOffers(View view){
-        controller.compareOffers(view);
+        //controller.compareOffers(view);
     }
 
     public void exit(View view){
