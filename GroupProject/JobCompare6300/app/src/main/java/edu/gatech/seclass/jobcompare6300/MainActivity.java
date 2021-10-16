@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Controller controller;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         adjustWeigthsButton = (Button) findViewById(R.id.adjustWeightsButton);
         compareOffersButton = (Button) findViewById(R.id.compareJobOffersButton);
         exitButton = (Button) findViewById(R.id.exitButton);
+        Toast.makeText(this.getApplicationContext(), "Welcome to the job compare app!", Toast.LENGTH_LONG).show();
     }
 
     //https://developer.android.com/training/basics/firstapp/starting-activity
@@ -41,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void adjustComparisonWeights(View view){
-        //controller.adjustWeights(view);
+        Intent intent = new Intent(this, AdjustWeightsActivity.class);
+        startActivity(intent);
     }
 
     public void compareJobOffers(View view){

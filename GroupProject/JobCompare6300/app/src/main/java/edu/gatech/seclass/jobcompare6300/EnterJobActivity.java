@@ -57,7 +57,7 @@ public class EnterJobActivity extends AppCompatActivity {
             }
         }
         catch (Exception e){
-            Toast.makeText(getApplicationContext(), "Failed to Initialize Controller", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Failed to Initialize Controller", Toast.LENGTH_LONG).show();
             System.out.println(e);
         }
     }
@@ -76,14 +76,13 @@ public class EnterJobActivity extends AppCompatActivity {
         int gymAllowance = Integer.parseInt(gymField.getText().toString());
 
         if(validateFields(view)) {
-            Toast.makeText(getApplicationContext(),"Updating current job...", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"Updating current job...", Toast.LENGTH_LONG).show();
             controller.editCurrentJob(title, company, city, state, colIndex, salary, bonus, teleworkDays, leaveDays, gymAllowance);
             this.finish();
         }
         else{
-            
-        }
 
+        }
     }
 
     public void cancel(View view){
