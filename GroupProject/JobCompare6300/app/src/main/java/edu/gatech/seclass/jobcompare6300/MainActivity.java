@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterJobOffer(View view){
-        //controller.enterJobOffer(view);
+        Intent intent = new Intent(this, EnterJobOfferActivity.class);
+        startActivity(intent);
     }
 
     public void adjustComparisonWeights(View view){
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void compareJobOffers(View view){
-        //controller.compareOffers(view);
+        //Intent intent = new Intent(this,)
     }
 
     public void exit(View view){

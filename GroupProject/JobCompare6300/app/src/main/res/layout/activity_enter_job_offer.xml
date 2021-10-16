@@ -276,8 +276,9 @@
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
-                android:layout_height="118dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="save"
                 android:text="Save" />
 
             <Button
@@ -285,6 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="cancel"
                 android:text="Cancel" />
         </LinearLayout>
 
@@ -296,15 +298,17 @@
             <Button
                 android:id="@+id/additionalOfferButton"
                 android:layout_width="237dp"
-                android:layout_height="86dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="enterAnotherOffer"
                 android:text="Enter Another Offer" />
 
             <Button
                 android:id="@+id/compareToCurrentJobButton"
                 android:layout_width="wrap_content"
-                android:layout_height="87dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="compareToCurrentJob"
                 android:text="Compare to Current Job" />
         </LinearLayout>
 
@@ -316,8 +320,9 @@
             <Button
                 android:id="@+id/mainMenuButton"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="58dp"
                 android:layout_weight="1"
+                android:onClick="mainMenu"
                 android:text="Main Menu" />
         </LinearLayout>
     </LinearLayout>
