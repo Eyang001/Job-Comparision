@@ -23,7 +23,7 @@ public class ComparisonWeights {
         this.gymAllowance = gymAllowance;
     }
 
-    public int getyearlySalary() {
+    public int getYearlySalary() {
         return yearlySalary;
     }
 
@@ -31,7 +31,7 @@ public class ComparisonWeights {
         this.yearlySalary = yearlySalary;
     }
 
-    public int getyearlyBonus() {
+    public int getYearlyBonus() {
         return yearlyBonus;
     }
 
@@ -39,7 +39,7 @@ public class ComparisonWeights {
         this.yearlyBonus = yearlyBonus;
     }
 
-    public int getteleDays() {
+    public int getTeleDays() {
         return teleDays;
     }
 
@@ -47,7 +47,7 @@ public class ComparisonWeights {
         this.teleDays = teleDays;
     }
 
-    public int getleaveDays() {
+    public int getLeaveDays() {
         return leaveDays;
     }
 
