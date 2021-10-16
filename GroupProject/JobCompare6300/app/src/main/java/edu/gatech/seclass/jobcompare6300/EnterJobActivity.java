@@ -29,7 +29,6 @@ public class EnterJobActivity extends AppCompatActivity {
         Intent intent=this.getIntent();
         controller = (Controller) intent.getExtras().get("Controller");
 
-        //add fields:
         EditText titleField = (EditText) findViewById(R.id.titleField);
         EditText companyField = (EditText) findViewById(R.id.companyField);
         EditText cityField = (EditText) findViewById(R.id.cityField);
@@ -59,7 +58,6 @@ public class EnterJobActivity extends AppCompatActivity {
 
     public void saveJob(View view){
         //get the info from the fields
-        //make a job object
         String title = titleField.getText().toString();
         String company = companyField.getText().toString();
         String city = cityField.getText().toString();
