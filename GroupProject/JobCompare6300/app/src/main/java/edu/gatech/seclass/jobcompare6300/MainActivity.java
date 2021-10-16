@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void compareJobOffers(View view){
-        //Intent intent = new Intent(this,)
+        Intent intent = new Intent(this, CompareOffersActivity.class);
+        startActivity(intent);
     }
 
     public void exit(View view){

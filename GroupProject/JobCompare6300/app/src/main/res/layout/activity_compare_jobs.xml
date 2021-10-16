@@ -61,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="132dp"
                 android:layout_weight="1"
+                android:onClick="compareJobs"
                 android:text="Compare" />
         </LinearLayout>
 
@@ -285,13 +286,15 @@
                 android:layout_width="132dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="anotherComparison"
                 android:text="Another Comparison" />
 
             <Button
                 android:id="@+id/mainMenuButton"
                 android:layout_width="wrap_content"
-                android:layout_height="167dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="mainMenu"
                 android:text="Main Menu" />
         </LinearLayout>
     </LinearLayout>
