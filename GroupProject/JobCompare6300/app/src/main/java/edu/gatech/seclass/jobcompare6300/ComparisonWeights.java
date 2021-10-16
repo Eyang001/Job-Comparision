@@ -7,6 +7,22 @@ public class ComparisonWeights {
     private int leaveDays;
     private int gymAllowance;
 
+    public ComparisonWeights() {
+        this.yearlySalary = 1;
+        this.yearlyBonus = 1;
+        this.teleDays = 1;
+        this.leaveDays = 1;
+        this.gymAllowance = 1;
+    }
+
+    public ComparisonWeights(int yearlySalary, int yearlyBonus, int teleDays, int leaveDays, int gymAllowance) {
+        this.yearlySalary = yearlySalary;
+        this.yearlyBonus = yearlyBonus;
+        this.teleDays = teleDays;
+        this.leaveDays = leaveDays;
+        this.gymAllowance = gymAllowance;
+    }
+
     public int getyearlySalary() {
         return yearlySalary;
     }
