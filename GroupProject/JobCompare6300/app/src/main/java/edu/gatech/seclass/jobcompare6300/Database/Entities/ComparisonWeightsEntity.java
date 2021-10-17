@@ -2,9 +2,13 @@ package edu.gatech.seclass.jobcompare6300.Database.Entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity
+@Entity (tableName = "comparisonWeights")
 public class ComparisonWeightsEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    public int weightID;
 
     @ColumnInfo(name = "yearlySalary")
     public int yearlySalary;

@@ -16,15 +16,15 @@ import edu.gatech.seclass.jobcompare6300.Database.Entities.ComparisonWeightsEnti
 public interface ComparisonWeightsDAO {
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)
-        public void insertSettings(ComparisonWeights... comparisonWeights);
+        public void insertComparisonWeights(ComparisonWeights... comparisonWeights);
 
         @Update
-        public void updateSettings(ComparisonWeights... comparisonWeights);
+        public void updateComparisonWeights(ComparisonWeights... comparisonWeights);
 
         @Delete
-        public void delete(ComparisonWeights comparisonWeights);
+        public void deleteComparisonWeights(ComparisonWeights... comparisonWeights);
 
         // fetch all settings as a list
-        @Query("SELECT * FROM ComparisonWeightsEntity")
+        @Query("SELECT * FROM comparisonWeights")
         List<ComparisonWeightsEntity> getAll();
 }
