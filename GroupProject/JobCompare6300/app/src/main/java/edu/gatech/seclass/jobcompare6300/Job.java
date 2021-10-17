@@ -42,8 +42,25 @@ public class Job {
     public void setGymAllowance(int gymAllowance){this.gymAllowance=gymAllowance;}
 
     public float getJobScore(ComparisonWeights weights){
+        /* function computes a Job's score*/
         float score=0;
-        /*compute the score*/
+
+        // from Emily job offer class
+
+        int sumWeights = weights.getYearlySalary() + weights.getYearlyBonus() + weights.getTeleDays()
+                + weights.getLeaveDays() + weights.getGymAllowance();
+        float yearlySalaryWeight = (float) weights.getYearlySalary()/sumWeights;
+        float yearlyBonusWeight = (float) weights.getYearlyBonus()/sumWeights;
+        float teleDaysWeight = (float) weights.getTeleDays()/sumWeights;
+        float leaveWeight = (float) weights.getLeaveDays()/sumWeights;
+        float gymWeight = (float) weights.getGymAllowance()/sumWeights;
+
+        float AYS = this.getSalary() * this.getLocationCostOfLivingIndex();
+        float AYB = this.getBonus() * this.getLocationCostOfLivingIndex();
+        score =  AYS * yearlySalaryWeight + AYB * yearlyBonusWeight
+                + this.getGymAllowance() * gymWeight + (this.getLeaveDays() * AYS / 260) * leaveWeight
+                + ((260 - 52 * this.getTeleworkDays()) * (AYS / 260) / 8) * teleDaysWeight;
+
         return score;
     }
 }
