@@ -1,9 +1,12 @@
-package edu.gatech.seclass.jobcompare6300.Database;
+package edu.gatech.seclass.jobcompare6300.Database.Entities;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.List;
+
+import edu.gatech.seclass.jobcompare6300.Database.Entities.JobEntity;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.LocationEntity;
 
 public class JobWithLocation {
 

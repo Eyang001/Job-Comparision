@@ -1,4 +1,4 @@
-package edu.gatech.seclass.jobcompare6300.Database;
+package edu.gatech.seclass.jobcompare6300.Database.DAO;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -25,6 +25,6 @@ public interface ComparisonWeightsDAO {
         public void delete(ComparisonWeights comparisonWeights);
 
         // fetch all settings as a list
-        @Query("SELECT * FROM ComparisonWeights")
+        @Query("SELECT * FROM ComparisonWeightsEntity")
         List<Job> getAll();
 }

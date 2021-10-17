@@ -1,7 +1,10 @@
-package edu.gatech.seclass.jobcompare6300.Database;
+package edu.gatech.seclass.jobcompare6300.Database.Entities;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
+
+import edu.gatech.seclass.jobcompare6300.Database.Entities.JobEntity;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.JobOffersEntity;
 
 public class JobAndJobOffers {
 

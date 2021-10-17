@@ -1,4 +1,4 @@
-package edu.gatech.seclass.jobcompare6300.Database;
+package edu.gatech.seclass.jobcompare6300.Database.Entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class JobEntity {
-
 
     @PrimaryKey(autoGenerate = true)
     public int jobID;

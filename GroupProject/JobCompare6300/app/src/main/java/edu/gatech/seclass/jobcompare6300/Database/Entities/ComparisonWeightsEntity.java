@@ -1,4 +1,4 @@
-package edu.gatech.seclass.jobcompare6300.Database;
+package edu.gatech.seclass.jobcompare6300.Database.Entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

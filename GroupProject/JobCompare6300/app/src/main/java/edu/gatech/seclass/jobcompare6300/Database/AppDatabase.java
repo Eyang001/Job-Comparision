@@ -6,6 +6,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import edu.gatech.seclass.jobcompare6300.Database.DAO.ComparisonWeightsDAO;
+import edu.gatech.seclass.jobcompare6300.Database.DAO.JobDAO;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.ComparisonWeightsEntity;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.JobEntity;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.JobOffersEntity;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.JobWithLocation;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.LocationEntity;
+
 @Database(entities = {
         JobEntity.class, ComparisonWeightsEntity.class,
         JobOffersEntity.class, JobWithLocation.class,
