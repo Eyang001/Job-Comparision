@@ -15,7 +15,7 @@ public class JobOffers {
     private boolean dirtyScores; //used to indicate that the weights have been updated but not the scores
 
     public JobOffers(){
-        this.jobOffers=new ArrayList<Job>();
+        this.jobOffers=new ArrayList<Job>(10);
         this.rankedJobOffers=new HashMap<Job, Float>();
         this.sortedJobOffers=new LinkedList<Job>();
         dirtyScores = false;
@@ -68,12 +68,18 @@ public class JobOffers {
 
     public void addOffer(Job job, ComparisonWeights weights, boolean isCurrentJob){
         /* if currentJob does not exist, add to index 0 */
-        if (isCurrentJob && getCurrentJob() == null) {jobOffers.add(0,job); }
+        if (isCurrentJob && getCurrentJob() == null) {
+            if(jobOffers.size() == 0) {jobOffers.add(job);}
+            else{jobOffers.set(0,job);}
+        }
         else if (!isCurrentJob){
             if (getCurrentJob() != null) {
                 jobOffers.add(jobOffers.size(), job);
             } else {
-                jobOffers.add(jobOffers.size() + 1, job);
+                if(jobOffers.size() == 0) {
+                    jobOffers.add(0, null);
+                }
+                jobOffers.add(jobOffers.size(), job);
             }
 
             //calculate score and add to rankedJobOffers
@@ -84,7 +90,10 @@ public class JobOffers {
 
 
     public Job getCurrentJob(){
-        return this.jobOffers.get(0);
+        if(this.jobOffers.size()>0){
+            return this.jobOffers.get(0);
+        }
+        else return null;
     }
 
     public Job getLastSavedJobOffer(){
