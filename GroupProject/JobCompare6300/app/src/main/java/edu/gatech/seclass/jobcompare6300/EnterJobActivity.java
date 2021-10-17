@@ -40,9 +40,31 @@ public class EnterJobActivity extends AppCompatActivity {
 
         try{
             Intent intent = getIntent();
+
+            String title = intent.getStringExtra("title");
+            titleField.setText(title);
+            String company = intent.getStringExtra("company");
+            companyField.setText(company);
+            String city = intent.getStringExtra("city");
+            cityField.setText(city);
+            String state = intent.getStringExtra("state");
+            stateField.setText(state);
+            int colIndex=intent.getIntExtra("colIndex",100);
+            colField.setText(String.valueOf(colIndex));
+            int salary=intent.getIntExtra("salary",0);
+            salaryField.setText(String.valueOf(salary));
+            int bonus=intent.getIntExtra("bonus",0);
+            bonusField.setText(String.valueOf(bonus));
+            int telework=intent.getIntExtra("telework",0);
+            teleworkField.setText(String.valueOf(telework));
+            int leave=intent.getIntExtra("leave",0);
+            leaveField.setText(String.valueOf(leave));
+            int gym=intent.getIntExtra("gym",0);
+            gymField.setText(String.valueOf(gym));
+
             controller = (Controller) intent.getExtras().get("Controller");
             //fill in fields if current job is saved
-            if(controller.getCurrentJob() != null){
+            /*if(controller.getCurrentJob() != null){
                 job=controller.getCurrentJob();
                 titleField.setText(job.getTitle());
                 companyField.setText(job.getCompany());
@@ -54,7 +76,7 @@ public class EnterJobActivity extends AppCompatActivity {
                 teleworkField.setText(job.getTeleworkDays());
                 leaveField.setText(job.getLeaveDays());
                 gymField.setText(job.getGymAllowance());
-            }
+            }*/
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), "Failed to Initialize Controller", Toast.LENGTH_LONG).show();
