@@ -14,15 +14,15 @@ import edu.gatech.seclass.jobcompare6300.Database.Entities.DirtyScoresEntity;
 @Dao
 public interface DirtyScoresDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public void insertSettings(DirtyScoresEntity... dirtyScoresEntities);
+    public void insertDirtyScore(DirtyScoresEntity... dirtyScore);
 
     @Update
-    public void updateSettings(DirtyScoresEntity... dirtyScoresEntities);
+    public void updateDirtyScore(DirtyScoresEntity... dirtyScore);
 
     @Delete
-    public void delete(DirtyScoresEntity dirtyScoresEntities);
+    public void deleteDirtyScore(DirtyScoresEntity... dirtyScore);
 
     // fetch all settings as a list
-    @Query("SELECT * FROM DirtyScoresEntity")
+    @Query("SELECT * FROM dirtyScore")
     List<DirtyScoresEntity> getAll();
 }
