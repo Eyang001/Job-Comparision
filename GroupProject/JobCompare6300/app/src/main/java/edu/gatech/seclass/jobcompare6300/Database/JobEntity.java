@@ -10,8 +10,8 @@ public class JobEntity {
     @PrimaryKey
     public int jobID;
 
-    @ForeignKey("locationID")
-    public String locationID;
+//    @ForeignKey("locationID")
+//    public String locationID;
 
     @ColumnInfo(name = "title")
     public String title;
