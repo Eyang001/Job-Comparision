@@ -34,7 +34,30 @@ public class MainActivity extends AppCompatActivity {
     //https://developer.android.com/training/basics/firstapp/starting-activity
     public void editCurrentJob(View view){
         Intent intent = new Intent(this, EnterJobActivity.class); //start enter current job activity, pass it controller
-        //intent.putExtra(controller);
+        Job currentJob = controller.getCurrentJob();
+        if(currentJob!=null){
+            String title=currentJob.getTitle();
+            intent.putExtra("title",title);
+            String company=currentJob.getCompany();
+            intent.putExtra("company",company);
+            String city=currentJob.getLocationCity();
+            intent.putExtra("city",city);
+            String state= currentJob.getLocationState();
+            intent.putExtra("state", state);
+            int colIndex= currentJob.getLocationCostOfLivingIndex();
+            intent.putExtra("colIndex", colIndex);
+            int salary= currentJob.getSalary();
+            intent.putExtra("salary", salary);
+            int bonus= currentJob.getBonus();
+            intent.putExtra("bonus",bonus);
+            int telework=currentJob.getTeleworkDays();
+            intent.putExtra("telework",telework);
+            int leave=currentJob.getLeaveDays();
+            intent.putExtra("leave",leave);
+            int gym=currentJob.getGymAllowance();
+            intent.putExtra("gym",gym);
+            //intent.putExtra(controller);
+        }
         startActivity(intent);
     }
 
