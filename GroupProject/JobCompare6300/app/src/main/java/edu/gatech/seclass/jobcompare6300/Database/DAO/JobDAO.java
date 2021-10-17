@@ -5,14 +5,11 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
 
 import edu.gatech.seclass.jobcompare6300.Database.Entities.JobEntity;
-import edu.gatech.seclass.jobcompare6300.Database.Entities.JobAndJobOffers;
-import edu.gatech.seclass.jobcompare6300.Database.Entities.JobWithLocation;
 import edu.gatech.seclass.jobcompare6300.Job;
 
 @Dao
@@ -34,19 +31,5 @@ public interface JobDAO {
 
     @Delete
     public void delete(JobEntity jobEntity);
-
-
-    // What are the below queries for???
-
-    //for 1-1 relationship
-    @Transaction
-    @Query("SELECT * FROM Job")
-    public List<JobAndJobOffers> getJobAndJobOffers();
-
-    //for 1-M relationship
-    @Transaction
-    @Query("SELECT * FROM Location")
-    public List<JobWithLocation> getJobWithLocation();
-
 
 }

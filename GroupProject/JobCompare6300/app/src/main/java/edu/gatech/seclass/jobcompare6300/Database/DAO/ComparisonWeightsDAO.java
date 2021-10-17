@@ -10,7 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import edu.gatech.seclass.jobcompare6300.ComparisonWeights;
-import edu.gatech.seclass.jobcompare6300.Job;
+import edu.gatech.seclass.jobcompare6300.Database.Entities.ComparisonWeightsEntity;
 
 @Dao
 public interface ComparisonWeightsDAO {
@@ -26,5 +26,5 @@ public interface ComparisonWeightsDAO {
 
         // fetch all settings as a list
         @Query("SELECT * FROM ComparisonWeightsEntity")
-        List<Job> getAll();
+        List<ComparisonWeightsEntity> getAll();
 }
