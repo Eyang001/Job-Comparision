@@ -14,15 +14,15 @@ import edu.gatech.seclass.jobcompare6300.Database.Entities.JobOffersEntity;
 @Dao
 public interface JobOffersDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public void insertSettings(JobOffersEntity... jobOffersEntities);
+    public void insertJobOffer(JobOffersEntity... jobOffers);
 
     @Update
-    public void updateSettings(JobOffersEntity... jobOffersEntities);
+    public void updateJobOffer(JobOffersEntity... jobOffers);
 
     @Delete
-    public void delete(JobOffersEntity jobOffersEntities);
+    public void deleteJobOffer(JobOffersEntity... jobOffers);
 
     // fetch all settings as a list
-    @Query("SELECT * FROM JobOffersEntity")
+    @Query("SELECT * FROM jobOffers")
     List<JobOffersEntity> getAll();
 }

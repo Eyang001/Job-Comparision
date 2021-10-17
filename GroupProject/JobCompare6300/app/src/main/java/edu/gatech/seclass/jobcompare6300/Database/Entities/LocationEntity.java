@@ -4,11 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.ForeignKey;
 
-import edu.gatech.seclass.jobcompare6300.Location;
-
-@Entity
+@Entity (tableName = "locations")
 public class LocationEntity {
 
     @PrimaryKey(autoGenerate = true)

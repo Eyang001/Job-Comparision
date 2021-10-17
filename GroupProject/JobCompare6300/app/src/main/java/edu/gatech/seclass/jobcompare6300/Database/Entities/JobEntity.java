@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
-@Entity
+@Entity (tableName = "jobs")
 public class JobEntity {
 
     @PrimaryKey(autoGenerate = true)

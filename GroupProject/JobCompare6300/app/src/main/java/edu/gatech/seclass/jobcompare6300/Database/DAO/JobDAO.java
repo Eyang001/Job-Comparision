@@ -16,20 +16,20 @@ import edu.gatech.seclass.jobcompare6300.Job;
 public interface JobDAO {
 
     // fetch all jobs as a list
-    @Query("SELECT * FROM JobEntity")
+    @Query("SELECT * FROM jobs")
     List<Job> getAll();
 
     // fetch title and company
-    @Query("SELECT title, company FROM JobEntity WHERE title IN (:title) AND company IN (:company)")
+    @Query("SELECT title, company FROM jobs WHERE title IN (:title) AND company IN (:company)")
     List<Job> getTitleCompany(String title, String company);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public void insert(JobEntity... jobEntities);
+    public void insertJob(JobEntity... jobs);
 
     @Update
-    public void update(JobEntity... jobEntities);
+    public void updateJob(JobEntity... jobs);
 
     @Delete
-    public void delete(JobEntity jobEntity);
+    public void deleteJob(JobEntity jobs);
 
 }

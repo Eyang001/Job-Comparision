@@ -15,14 +15,14 @@ import edu.gatech.seclass.jobcompare6300.Database.Entities.LocationEntity;
 public interface LocationDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public void insert(LocationEntity... locationEntities);
+    public void insertLocation(LocationEntity... locations);
 
     @Update
-    public void update(LocationEntity... locationEntities);
+    public void updateLocation(LocationEntity... locations);
 
     @Delete
-    public void delete(LocationEntity locationEntities);
+    public void deleteLocation(LocationEntity locations);
 
-    @Query("SELECT * FROM LocationEntity")
+    @Query("SELECT * FROM locations")
     List<LocationEntity> getAll();
 }
