@@ -27,16 +27,16 @@ public class EnterJobActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_current_job);
 
-        EditText titleField = (EditText) findViewById(R.id.titleField);
-        EditText companyField = (EditText) findViewById(R.id.companyField);
-        EditText cityField = (EditText) findViewById(R.id.cityField);
-        EditText stateField = (EditText) findViewById(R.id.stateField);
-        EditText colField = (EditText) findViewById(R.id.colField);
-        EditText salaryField = (EditText) findViewById(R.id.salaryField);
-        EditText bonusField = (EditText) findViewById(R.id.bonusField);
-        EditText teleworkField = (EditText) findViewById(R.id.teleworkField);
-        EditText leaveField = (EditText) findViewById(R.id.leaveField);
-        EditText gymField = (EditText) findViewById(R.id.gymField);
+        titleField = (EditText) findViewById(R.id.titleField);
+        companyField = (EditText) findViewById(R.id.companyField);
+        cityField = (EditText) findViewById(R.id.cityField);
+        stateField = (EditText) findViewById(R.id.stateField);
+        colField = (EditText) findViewById(R.id.colField);
+        salaryField = (EditText) findViewById(R.id.salaryField);
+        bonusField = (EditText) findViewById(R.id.bonusField);
+        teleworkField = (EditText) findViewById(R.id.teleworkField);
+        leaveField = (EditText) findViewById(R.id.leaveField);
+        gymField = (EditText) findViewById(R.id.gymField);
 
         try{
             Intent intent = getIntent();

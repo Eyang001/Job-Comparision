@@ -31,20 +31,20 @@ public class EnterJobOfferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_job_offer);
 
-        EditText titleField = (EditText) findViewById(R.id.titleField);
-        EditText companyField = (EditText) findViewById(R.id.companyField);
-        EditText cityField = (EditText) findViewById(R.id.cityField);
-        EditText stateField = (EditText) findViewById(R.id.stateField);
-        EditText colField = (EditText) findViewById(R.id.colField);
-        EditText salaryField = (EditText) findViewById(R.id.salaryField);
-        EditText bonusField = (EditText) findViewById(R.id.bonusField);
-        EditText teleworkField = (EditText) findViewById(R.id.teleworkField);
-        EditText leaveField = (EditText) findViewById(R.id.leaveField);
-        EditText gymField = (EditText) findViewById(R.id.gymField);
-        Button saveButton = (Button) findViewById(R.id.saveButton);
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
-        Button additionalOfferButton = (Button) findViewById(R.id.additionalOfferButton);
-        Button compareToCurrentJobButton = (Button) findViewById(R.id.compareToCurrentJobButton);
+        titleField = (EditText) findViewById(R.id.titleField);
+        companyField = (EditText) findViewById(R.id.companyField);
+        cityField = (EditText) findViewById(R.id.cityField);
+        stateField = (EditText) findViewById(R.id.stateField);
+        colField = (EditText) findViewById(R.id.colField);
+        salaryField = (EditText) findViewById(R.id.salaryField);
+        bonusField = (EditText) findViewById(R.id.bonusField);
+        teleworkField = (EditText) findViewById(R.id.teleworkField);
+        leaveField = (EditText) findViewById(R.id.leaveField);
+        gymField = (EditText) findViewById(R.id.gymField);
+        saveButton = (Button) findViewById(R.id.saveButton);
+        cancelButton = (Button) findViewById(R.id.cancelButton);
+        additionalOfferButton = (Button) findViewById(R.id.additionalOfferButton);
+        compareToCurrentJobButton = (Button) findViewById(R.id.compareToCurrentJobButton);
     }
 
     public void save(View view){
@@ -52,7 +52,16 @@ public class EnterJobOfferActivity extends AppCompatActivity {
     }
 
     public void cancel(View view){
-
+        titleField.setText("");
+        companyField.setText("");
+        cityField.setText("");
+        stateField.setText("");
+        colField.setText("");
+        salaryField.setText("");
+        bonusField.setText("");
+        teleworkField.setText("");
+        leaveField.setText("");
+        gymField.setText("");
     }
     public void enterAnotherOffer(View view){
         Intent intent = new Intent(this, EnterJobOfferActivity.class);

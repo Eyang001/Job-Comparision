@@ -20,19 +20,6 @@ public class Controller {
     public void run(){
         //start DB handler
 
-        /*loop
-        switch(user button selection){
-            case enter current job:
-            case enter job offer:
-            case adjust comparison weights:
-            case compare job offers:
-            case exit:
-                //spin down DB handler
-                //
-            case default:
-                continue
-        */
-
 
         /* listen for menu selection
         handle selection accordingly
