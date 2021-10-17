@@ -7,18 +7,26 @@ import androidx.room.Entity;
 public class ComparisonWeightsEntity {
 
     @ColumnInfo(name = "yearlySalary")
-    public String yearlySalary;
+    public int yearlySalary;
 
     @ColumnInfo(name = "yearlyBonus")
-    public String yearlyBonus;
+    public int yearlyBonus;
 
     @ColumnInfo(name = "teleDays")
-    public String teleDays;
+    public int teleDays;
 
     @ColumnInfo(name = "leave")
-    public String leave;
+    public int leave;
 
     @ColumnInfo(name = "gym")
-    public String gym;
+    public int gym;
+
+    public ComparisonWeightsEntity(int yearlySalary,int yearlyBonus, int teleDays, int  leave, int gym){
+        this.yearlySalary = yearlySalary;
+        this.yearlyBonus = yearlyBonus;
+        this.teleDays = teleDays;
+        this.leave = leave;
+        this.gym = gym;
+    }
 
 }

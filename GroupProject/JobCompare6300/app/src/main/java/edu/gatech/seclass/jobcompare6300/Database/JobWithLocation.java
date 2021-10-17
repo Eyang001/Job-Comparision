@@ -15,4 +15,9 @@ public class JobWithLocation {
     )
     public List<JobEntity> jobs;
 
+    public JobWithLocation(LocationEntity location, List jobs){
+        this.location = location;
+        this.jobs = jobs;
+    }
+
 }

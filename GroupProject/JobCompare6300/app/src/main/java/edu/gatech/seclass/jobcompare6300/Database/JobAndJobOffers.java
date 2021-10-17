@@ -13,4 +13,9 @@ public class JobAndJobOffers {
     )
     public JobOffersEntity jobOffers;
 
+    public JobAndJobOffers(JobEntity job, JobOffersEntity jobOffers){
+        this.job = job;
+        this.jobOffers = jobOffers;
+    }
+
 }

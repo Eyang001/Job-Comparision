@@ -3,24 +3,37 @@ package edu.gatech.seclass.jobcompare6300.Database;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
+import androidx.room.Update;
+
+import java.util.List;
+
+import edu.gatech.seclass.jobcompare6300.Job;
 
 @Dao
-public interface JobDao {
+public interface JobDAO {
 
-    //TODO below
-
-    //TODO below
-
-    @Query("SELECT * FROM Job")
+    // fetch all jobs as a list
+    @Query("SELECT * FROM JobEntity")
     List<Job> getAll();
 
-    @Query("SELECT * FROM Job WHERE uid IN (:userIds)")
-    List<User> loadAllByIds(int[] userIds);
+    // fetch title and company
+    @Query("SELECT title, company FROM JobEntity WHERE title IN (:title) AND company IN (:company)")
+    List<Job> getTitleCompany(String title, String company);
 
-    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-            "last_name LIKE :last LIMIT 1")
-    User findByName(String first, String last);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(JobEntity... jobEntities);
+
+    @Update
+    void update(JobEntity... jobEntities);
+
+    @Delete
+    void delete(JobEntity jobEntity);
+
+
+    // What are the below queries for???
 
     //for 1-1 relationship
     @Transaction
@@ -33,9 +46,4 @@ public interface JobDao {
     public List<JobWithLocation> getJobWithLocation();
 
 
-    @Insert
-    void insertAll(User... users);
-
-    @Delete
-    void delete(User user);
 }
