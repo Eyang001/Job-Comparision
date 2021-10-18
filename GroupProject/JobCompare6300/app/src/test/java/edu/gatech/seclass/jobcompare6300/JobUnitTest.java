@@ -118,6 +118,17 @@ public class JobUnitTest {
     @Test
     public void getJobScore() {
         ComparisonWeights comparisonWeights = new ComparisonWeights();
-        //assertEquals(, job.getJobScore(comparisonWeights));
+        assertEquals(29138.4615, job.getJobScore(comparisonWeights),1); // (100000+ 50000+ 500+ (20* 100000/ 260) - ((260 - 52 * 0) * (100000/ 260) / 8))/5
+
+        Location location = new Location("Test City", "Testland", 200);
+        job = new Job("Test Engineer", "GT", location, 100000, 50000,0,20,500);
+        assertEquals(14619.2308, job.getJobScore(comparisonWeights),1); // (100000/2+ 50000/2+ 500+ (20* (100000/2)/ 260) - ((260 - 52 * 0) * ((100000/2)/ 260) / 8))/5
+
+        job = new Job("Test Engineer", "GT", location, 100000, 50000,1,20,500);
+        assertEquals(14869.2308, job.getJobScore(comparisonWeights),1); // (100000/2+ 50000/2+ 500+ (20* (100000/2)/ 260) - ((260 - 52 * 1) * ((100000/2)/ 260) / 8))/5
+
+        ComparisonWeights comparisonWeights2 = new ComparisonWeights(2,3,4,5,6);
+        assertEquals(8861.53846, job.getJobScore(comparisonWeights2),1); // (2/20)(100000/2) + (3/20)(50000/2) + (6/20)500 + (5/20)(20* (100000/2)/ 260) - (4/20)((260 - 52 * 1) * ((100000/2)/ 260)/8)
+                                                                                        //      5000 + 3750 + 150 + 961.538462 - 1000
     }
 }
