@@ -38,31 +38,22 @@ public class EnterJobActivity extends AppCompatActivity {
         leaveField = (EditText) findViewById(R.id.leaveField);
         gymField = (EditText) findViewById(R.id.gymField);
 
-        try{
-            Intent intent = getIntent();
-            //fill in fields if current job is saved
-            if(Controller.getCurrentJob() != null){
-                job=Controller.getCurrentJob();
-                titleField.setText(job.getTitle());
-                companyField.setText(job.getCompany());
-                cityField.setText(job.getLocationCity());
-                stateField.setText(job.getLocationState());
-                colField.setText(String.valueOf(job.getLocationCostOfLivingIndex()));
-                salaryField.setText(String.valueOf(job.getSalary()));
-                bonusField.setText(String.valueOf(job.getBonus()));
-                teleworkField.setText(String.valueOf(job.getTeleworkDays()));
-                leaveField.setText(String.valueOf(job.getLeaveDays()));
-                gymField.setText(String.valueOf(job.getGymAllowance()));
-            }
-        }
-        catch (Exception e){
-            Toast.makeText(getApplicationContext(), "Failed to Initialize Controller", Toast.LENGTH_LONG).show();
-            System.out.println(e);
+        if(Controller.getCurrentJob() != null){
+            job=Controller.getCurrentJob();
+            titleField.setText(job.getTitle());
+            companyField.setText(job.getCompany());
+            cityField.setText(job.getLocationCity());
+            stateField.setText(job.getLocationState());
+            colField.setText(String.valueOf(job.getLocationCostOfLivingIndex()));
+            salaryField.setText(String.valueOf(job.getSalary()));
+            bonusField.setText(String.valueOf(job.getBonus()));
+            teleworkField.setText(String.valueOf(job.getTeleworkDays()));
+            leaveField.setText(String.valueOf(job.getLeaveDays()));
+            gymField.setText(String.valueOf(job.getGymAllowance()));
         }
     }
 
     public void saveJob(View view){
-        //get the info from the fields
         if(validateFields(view)) {
             String title = titleField.getText().toString();
             String company = companyField.getText().toString();
@@ -77,9 +68,6 @@ public class EnterJobActivity extends AppCompatActivity {
             Controller.editCurrentJob(title, company, city, state, colIndex, salary, bonus, teleworkDays, leaveDays, gymAllowance);
             Toast.makeText(getApplicationContext(),"Updating current job...", Toast.LENGTH_LONG).show();
             this.finish();
-        }
-        else{
-
         }
     }
 

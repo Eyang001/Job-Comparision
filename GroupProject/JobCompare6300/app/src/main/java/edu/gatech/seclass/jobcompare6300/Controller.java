@@ -31,6 +31,8 @@ public class Controller {
 
     public static Job getCurrentJob(){return jobOffers.getCurrentJob();}
 
+    public static Job getLatestOffer(){return jobOffers.getLastSavedJobOffer();}
+
     public static Location getLocationByCityState(String city, String state){
         for (Location l: locations){
             if(l.getCity() == city && l.getState()==state) return l;

@@ -53,6 +53,17 @@ public class CompareOffersActivity extends AppCompatActivity {
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
 
+        try{
+            boolean compareToCurrentJob = getIntent().getBooleanExtra("compareToCurrentJob",false);
+            if(compareToCurrentJob){
+                Job currentJob=Controller.getCurrentJob();
+                Job latestJob=Controller.getLatestOffer();
+                //populate spinners
+            }
+        }
+        catch(Exception e){
+
+        }
     }
 
 
@@ -70,4 +81,8 @@ public class CompareOffersActivity extends AppCompatActivity {
         this.finish();
     }
 
+    private void updateJob1Fields(Job job){
+        job1Salary.setText(String.valueOf(job.getSalary()));
+        job1Bonus.setText(String.valueOf(job.getBonus()));
+    }
 }

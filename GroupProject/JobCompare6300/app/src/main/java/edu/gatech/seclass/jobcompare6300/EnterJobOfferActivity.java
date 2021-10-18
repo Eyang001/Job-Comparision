@@ -70,9 +70,6 @@ public class EnterJobOfferActivity extends AppCompatActivity {
             additionalOfferButton.setEnabled(true);
             cancelButton.setEnabled(false);
         }
-        else {
-
-        }
     }
 
     public void cancel(View view){
