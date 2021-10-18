@@ -112,4 +112,5 @@ public class JobOffers {
         return this.rankedJobOffers.get(job);
     }
 
+    public LinkedList<Job> getSortedJobOffers(){return sortedJobOffers;}
 }
