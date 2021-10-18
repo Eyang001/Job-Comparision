@@ -7,9 +7,9 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class Controller {
-    private JobOffers jobOffers;
-    private ComparisonWeights weights;
-    private ArrayList<Location> locations;
+    private static JobOffers jobOffers;
+    private static ComparisonWeights weights;
+    private static ArrayList<Location> locations;
 
     public Controller(){
         jobOffers = new JobOffers();
@@ -29,19 +29,19 @@ public class Controller {
 
     }
 
-    public Job getCurrentJob(){return jobOffers.getCurrentJob();}
+    public static Job getCurrentJob(){return jobOffers.getCurrentJob();}
 
-    public Location getLocationByCityState(String city, String state){
+    public static Location getLocationByCityState(String city, String state){
         for (Location l: locations){
             if(l.getCity() == city && l.getState()==state) return l;
         }
         return null;
     }
 
-    public void editCurrentJob(String title, String company, String city, String state, int colIndex,
+    public static void editCurrentJob(String title, String company, String city, String state, int colIndex,
                         int salary, int bonus, int teleworkDays, int leaveDays, int gymAllowance){
         Job job = jobOffers.getCurrentJob();
-        this.addLocation(city, state, colIndex);
+        addLocation(city, state, colIndex);
         Location location = getLocationByCityState(city, state);
         if(job==null){
             job = new Job(title, company, location, salary, bonus, teleworkDays, leaveDays, gymAllowance);
@@ -56,14 +56,19 @@ public class Controller {
             job.setLeaveDays(leaveDays);
             job.setGymAllowance(gymAllowance);
         }
-        jobOffers.addOffer(job, this.weights, true);
+        jobOffers.addOffer(job, weights, true);
     }
 
-    public void enterJobOffer(String title, String company, String city, String state, int colIndex, int salary, int bonus, int teleworkDays, int leaveDays, int gymAllowance){
+    public static void enterJobOffer(String title, String company, String city, String state, int colIndex,
+                      int salary, int bonus, int teleworkDays, int leaveDays, int gymAllowance){
+        addLocation(city, state, colIndex);
+        Location location=getLocationByCityState(city,state);
 
+        jobOffers.addOffer(new Job(title, company, location, salary, bonus, teleworkDays, leaveDays,
+                gymAllowance), weights, false);
     }
 
-    public void adjustWeights(int salaryWeight, int bonusWeight, int teleWeight, int leaveWeight, int gymWeight) {
+    public static void adjustWeights(int salaryWeight, int bonusWeight, int teleWeight, int leaveWeight, int gymWeight) {
         weights.setYearlySalary(salaryWeight);
         weights.setYearlyBonus(bonusWeight);
         weights.setTeleDays(teleWeight);
@@ -71,13 +76,13 @@ public class Controller {
         weights.setGymAllowance(gymWeight);
     }
 
-    public void compareOffers(View view){
+    public static void compareOffers(View view){
         /* display activity_compare_jobs
          */
     }
 
     //adds location if it does not exist, updates the cost of living index if the location does exist.
-    private void addLocation(String city, String state, int colIndex){
+    private static void addLocation(String city, String state, int colIndex){
         //O(2n)
         if(!locationIsStored(city,state)){
             locations.add(new Location(city, state, colIndex));
@@ -92,7 +97,7 @@ public class Controller {
         }
     }
     
-    private boolean locationIsStored(String city, String state){
+    private static boolean locationIsStored(String city, String state){
         boolean isStored=false;
         for (Location l: locations) {
             if(l.getCity().equals(city) && l.getState().equals(state)){

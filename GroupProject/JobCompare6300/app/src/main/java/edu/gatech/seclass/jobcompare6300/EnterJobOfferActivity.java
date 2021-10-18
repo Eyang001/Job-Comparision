@@ -46,23 +46,32 @@ public class EnterJobOfferActivity extends AppCompatActivity {
         cancelButton = (Button) findViewById(R.id.cancelButton);
         additionalOfferButton = (Button) findViewById(R.id.additionalOfferButton);
         compareToCurrentJobButton = (Button) findViewById(R.id.compareToCurrentJobButton);
+        additionalOfferButton.setEnabled(false);
+        compareToCurrentJobButton.setEnabled(false);
     }
 
     public void save(View view){
-        String title = titleField.getText().toString();
-        String company = companyField.getText().toString();
-        String city = cityField.getText().toString();
-        String state = stateField.getText().toString();
-        int colIndex = Integer.parseInt(colField.getText().toString());
-        int salary = Integer.parseInt(salaryField.getText().toString());
-        int bonus = Integer.parseInt(bonusField.getText().toString());
-        int teleworkDays = Integer.parseInt(teleworkField.getText().toString());
-        int leaveDays = Integer.parseInt(leaveField.getText().toString());
-        int gymAllowance = Integer.parseInt(gymField.getText().toString());
-
         if(validateFields(view)) {
-            Toast.makeText(getApplicationContext(),"Updating current job...", Toast.LENGTH_LONG).show();
-            controller.editCurrentJob(title, company, city, state, colIndex, salary, bonus, teleworkDays, leaveDays, gymAllowance);
+            String title = titleField.getText().toString();
+            String company = companyField.getText().toString();
+            String city = cityField.getText().toString();
+            String state = stateField.getText().toString();
+            int colIndex = Integer.parseInt(colField.getText().toString());
+            int salary = Integer.parseInt(salaryField.getText().toString());
+            int bonus = Integer.parseInt(bonusField.getText().toString());
+            int teleworkDays = Integer.parseInt(teleworkField.getText().toString());
+            int leaveDays = Integer.parseInt(leaveField.getText().toString());
+            int gymAllowance = Integer.parseInt(gymField.getText().toString());
+            Controller.enterJobOffer(title, company, city, state, colIndex, salary, bonus, teleworkDays, leaveDays, gymAllowance);
+            Toast.makeText(getApplicationContext(),"Adding job...", Toast.LENGTH_LONG).show();
+            if(Controller.getCurrentJob()!=null){
+                compareToCurrentJobButton.setEnabled(true);
+            }
+            additionalOfferButton.setEnabled(true);
+            cancelButton.setEnabled(false);
+        }
+        else {
+
         }
     }
 
@@ -86,6 +95,7 @@ public class EnterJobOfferActivity extends AppCompatActivity {
 
     public void compareToCurrentJob(View view){
         Intent intent = new Intent(this, CompareOffersActivity.class);
+        intent.putExtra("compareToCurrentJob", true);
         startActivity(intent);
         this.finish();
     }
@@ -94,19 +104,12 @@ public class EnterJobOfferActivity extends AppCompatActivity {
         this.finish();
     }
 
-    public boolean validateFields(View view){
+    private boolean validateFields(View view){
         boolean allFieldsValid=true;
         String title = titleField.getText().toString();
         String company = companyField.getText().toString();
         String city = cityField.getText().toString();
         String state = stateField.getText().toString();
-        int colIndex = Integer.parseInt(colField.getText().toString());
-        int salary = Integer.parseInt(salaryField.getText().toString());
-        int bonus = Integer.parseInt(bonusField.getText().toString());
-        int teleworkDays = Integer.parseInt(teleworkField.getText().toString());
-        int leaveDays = Integer.parseInt(leaveField.getText().toString());
-        int gymAllowance = Integer.parseInt(gymField.getText().toString());
-
         if(title.length() == 0){
             allFieldsValid=false;
             titleField.setError("Please enter a job title before saving");
@@ -123,31 +126,78 @@ public class EnterJobOfferActivity extends AppCompatActivity {
             allFieldsValid=false;
             stateField.setError("Please enter a state before saving");
         }
-        if(colIndex<=0){
+        try{
+            int colIndex = Integer.parseInt(colField.getText().toString());
+            if(colIndex<=0){
+                allFieldsValid=false;
+                colField.setError("Please enter a positive integer before saving");
+            }
+        }
+        catch(NumberFormatException e){
             allFieldsValid=false;
             colField.setError("Please enter a positive integer before saving");
         }
-        if(salary<=0){
+
+        try{
+            int salary = Integer.parseInt(salaryField.getText().toString());
+            if(salary<=0){
+                allFieldsValid=false;
+                salaryField.setError("Please enter a positive integer before saving");
+            }
+        }
+        catch(NumberFormatException e){
             allFieldsValid=false;
             salaryField.setError("Please enter a positive integer before saving");
         }
-        if(bonus<=0){
+
+        try{
+            int bonus = Integer.parseInt(bonusField.getText().toString());
+            if(bonus<=0){
+                allFieldsValid=false;
+                bonusField.setError("Please enter a positive integer before saving");
+            }
+        }
+        catch(NumberFormatException e){
             allFieldsValid=false;
             bonusField.setError("Please enter a positive integer before saving");
         }
-        if(teleworkDays<0 || teleworkDays>5){
+
+        try{
+            int teleworkDays = Integer.parseInt(teleworkField.getText().toString());
+            if(teleworkDays<0 || teleworkDays>5){
+                allFieldsValid=false;
+                teleworkField.setError("Please enter a value in [0,5] before saving");
+            }
+        }
+        catch(NumberFormatException e){
             allFieldsValid=false;
             teleworkField.setError("Please enter a value in [0,5] before saving");
         }
-        if(leaveDays<0 || leaveDays>365){
+
+        try{
+            int leaveDays = Integer.parseInt(leaveField.getText().toString());
+            if(leaveDays<0 || leaveDays>365){
+                allFieldsValid=false;
+                leaveField.setError("Please enter a value in [0, 365] before saving");
+            }
+        }
+        catch(NumberFormatException e){
             allFieldsValid=false;
             leaveField.setError("Please enter a value in [0, 365] before saving");
         }
-        if(gymAllowance<0 || gymAllowance>500){
+
+        try{
+            int gymAllowance = Integer.parseInt(gymField.getText().toString());
+            if(gymAllowance<0 || gymAllowance>500){
+                allFieldsValid=false;
+                gymField.setError("Please enter a value in [0, 500] before saving");
+            }
+        }
+        catch(NumberFormatException e){
             allFieldsValid=false;
             gymField.setError("Please enter a value in [0, 500] before saving");
         }
+
         return allFieldsValid;
     }
-
 }

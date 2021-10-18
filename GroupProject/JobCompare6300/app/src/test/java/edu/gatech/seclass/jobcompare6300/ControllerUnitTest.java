@@ -33,10 +33,10 @@ public class ControllerUnitTest {
         int teleworkDays = 0;
         int leaveDays = 25;
         int gymAllowance = 500;
-        controller.editCurrentJob(title, company, city, state, colIndex, salary, bonus, teleworkDays, leaveDays, gymAllowance);
-        assertNotNull(controller.getCurrentJob());
-        assertNotNull(controller.getLocationByCityState(city,state));
-        Location location = controller.getLocationByCityState(city, state);
+        Controller.editCurrentJob(title, company, city, state, colIndex, salary, bonus, teleworkDays, leaveDays, gymAllowance);
+        assertNotNull(Controller.getCurrentJob());
+        assertNotNull(Controller.getLocationByCityState(city,state));
+        Location location = Controller.getLocationByCityState(city, state);
         assertEquals("Seattle", location.getCity());
         assertEquals("WA", location.getState());
         assertEquals(100, location.getCostOfLivingIndex());

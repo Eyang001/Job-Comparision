@@ -53,13 +53,13 @@ public class CompareOffersActivity extends AppCompatActivity {
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
 
-
     }
 
 
     public void compareJobs(View view){
-
+        //get job1, job2 select the job objects
     }
+
     public void anotherComparison(View view){
         Intent intent = new Intent(this, CompareOffersActivity.class);
         startActivity(intent);
