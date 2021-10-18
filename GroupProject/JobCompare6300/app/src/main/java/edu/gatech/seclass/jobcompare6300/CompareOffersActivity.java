@@ -3,6 +3,7 @@ package edu.gatech.seclass.jobcompare6300;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +30,9 @@ public class CompareOffersActivity extends AppCompatActivity {
     private TextView job2Gym;
     private Spinner job1Spinner;
     private Spinner job2Spinner;
+    private Button compareButton;
+    private Button anotherComparisonButton;
+    private Button mainMenuButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -52,16 +56,21 @@ public class CompareOffersActivity extends AppCompatActivity {
         job2Gym = (TextView) findViewById(R.id.gymJob2);
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
+        compareButton = (Button) findViewById(R.id.compareButton);
+        anotherComparisonButton = (Button) findViewById(R.id.resetButton);
+        mainMenuButton = (Button) findViewById(R.id.mainMenuButton);
 
         try{
             boolean compareToCurrentJob = getIntent().getBooleanExtra("compareToCurrentJob",false);
             if(compareToCurrentJob){
                 Job currentJob=Controller.getCurrentJob();
                 Job latestJob=Controller.getLatestOffer();
-                //populate spinners
+                //populate fields
+                updateJob1Fields(currentJob);
+                updateJob2Fields(latestJob);
             }
         }
-        catch(Exception e){
+        catch(Exception ignored){
 
         }
     }
@@ -69,6 +78,8 @@ public class CompareOffersActivity extends AppCompatActivity {
 
     public void compareJobs(View view){
         //get job1, job2 select the job objects
+        //job1Spinner.getSelectedItemPosition();
+        //job2Spinner.getSelectedItemPosition();
     }
 
     public void anotherComparison(View view){
@@ -84,5 +95,23 @@ public class CompareOffersActivity extends AppCompatActivity {
     private void updateJob1Fields(Job job){
         job1Salary.setText(String.valueOf(job.getSalary()));
         job1Bonus.setText(String.valueOf(job.getBonus()));
+        String loc = job.getLocationCity()+", "+job.getLocationState()+": "+job.getLocationCostOfLivingIndex();
+        job1Location.setText(loc);
+        job1Title.setText(job.getTitle());
+        job1Company.setText(job.getCompany());
+        job1Telework.setText(String.valueOf(job.getTeleworkDays()));
+        job1Leave.setText(String.valueOf(job.getLeaveDays()));
+        job1Gym.setText(String.valueOf(job.getGymAllowance()));
+    }
+    private void updateJob2Fields(Job job){
+        job2Salary.setText(String.valueOf(job.getSalary()));
+        job2Bonus.setText(String.valueOf(job.getBonus()));
+        String loc = job.getLocationCity()+", "+job.getLocationState()+": "+job.getLocationCostOfLivingIndex();
+        job2Location.setText(loc);
+        job2Title.setText(job.getTitle());
+        job2Company.setText(job.getCompany());
+        job2Telework.setText(String.valueOf(job.getTeleworkDays()));
+        job2Leave.setText(String.valueOf(job.getLeaveDays()));
+        job2Gym.setText(String.valueOf(job.getGymAllowance()));
     }
 }

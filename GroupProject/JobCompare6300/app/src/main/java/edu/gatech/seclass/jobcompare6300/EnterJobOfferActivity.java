@@ -69,6 +69,7 @@ public class EnterJobOfferActivity extends AppCompatActivity {
             }
             additionalOfferButton.setEnabled(true);
             cancelButton.setEnabled(false);
+            saveButton.setEnabled(false);
         }
     }
 

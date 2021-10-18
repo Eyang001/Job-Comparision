@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Controller {
     private static JobOffers jobOffers;
@@ -29,6 +30,10 @@ public class Controller {
 
     }
 
+    public static LinkedList<Job> getSortedJobs(){
+        jobOffers.updateJobScores(weights);
+        return jobOffers.getSortedJobOffers();
+    }
     public static Job getCurrentJob(){return jobOffers.getCurrentJob();}
 
     public static Job getLatestOffer(){return jobOffers.getLastSavedJobOffer();}
