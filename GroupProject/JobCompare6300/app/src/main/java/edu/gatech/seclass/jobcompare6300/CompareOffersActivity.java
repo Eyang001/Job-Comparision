@@ -3,12 +3,16 @@ package edu.gatech.seclass.jobcompare6300;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class CompareOffersActivity extends AppCompatActivity {
 
@@ -34,6 +38,7 @@ public class CompareOffersActivity extends AppCompatActivity {
     private Button anotherComparisonButton;
     private Button mainMenuButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -56,6 +61,15 @@ public class CompareOffersActivity extends AppCompatActivity {
         job2Gym = (TextView) findViewById(R.id.gymJob2);
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
+
+        ArrayList<Job> arrayList = new ArrayList<>(Controller.getSortedJobs()); //converting b/c ArrayAdapter only takes arraylist not linkedlist
+        ArrayList<Job> arrayList2 = new ArrayList<>(Controller.getSortedJobs()); //converting b/c ArrayAdapter only takes arraylist not linkedlist
+
+        ArrayAdapter<?> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+        job1Spinner.setAdapter(adapter);
+        ArrayAdapter<?> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrayList2);
+        job2Spinner.setAdapter(adapter2);
+
         compareButton = (Button) findViewById(R.id.compareButton);
         anotherComparisonButton = (Button) findViewById(R.id.resetButton);
         mainMenuButton = (Button) findViewById(R.id.mainMenuButton);
