@@ -37,6 +37,10 @@ public class CompareOffersActivity extends AppCompatActivity {
     private Button compareButton;
     private Button anotherComparisonButton;
     private Button mainMenuButton;
+    private ArrayList<Job> jobList ;
+    private ArrayList<String> jobTitleCompany;
+    ArrayAdapter<?> adapter ;
+    ArrayAdapter<?> adapter2;
 
 
     @Override
@@ -62,13 +66,22 @@ public class CompareOffersActivity extends AppCompatActivity {
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
 
-        ArrayList<Job> arrayList = new ArrayList<>(Controller.getSortedJobs()); //converting b/c ArrayAdapter only takes arraylist not linkedlist
-        ArrayList<Job> arrayList2 = new ArrayList<>(Controller.getSortedJobs()); //converting b/c ArrayAdapter only takes arraylist not linkedlist
+        // for testing below
+//        arrayList.add(new Job("test", "test", new Location("test","test",100),0,0,0, 0,0));
+//        arrayList.add(new Job("test2", "test2", new Location("test2","test2",100),0,0,0, 0,0));
+//        arrayList2.add(new Job("test3", "test3", new Location("test3","test3",100),0,0,0, 0,0));
+//        arrayList2.add(new Job("test4", "test4", new Location("test4","test4",100),0,0,0, 0,0));
 
-        ArrayAdapter<?> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+        jobList = new ArrayList<>(Controller.getSortedJobs());
+        jobTitleCompany = getTitleCompany(jobList); //convert toString
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, jobTitleCompany);
         job1Spinner.setAdapter(adapter);
-        ArrayAdapter<?> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrayList2);
+        job1Spinner.getSelectedItemPosition();
+
+        adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, jobTitleCompany);
         job2Spinner.setAdapter(adapter2);
+        job2Spinner.getSelectedItemPosition();
 
         compareButton = (Button) findViewById(R.id.compareButton);
         anotherComparisonButton = (Button) findViewById(R.id.resetButton);
@@ -89,11 +102,22 @@ public class CompareOffersActivity extends AppCompatActivity {
         }
     }
 
+    // toString function for compareJobOffers drop down list
+    private ArrayList<String> getTitleCompany(ArrayList<Job> sortedJobs) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        for(Job j : sortedJobs){
+            arrayList.add(j.getTitle()+" | "+j.getCompany());
+        }
+        return arrayList;
+    }
 
     public void compareJobs(View view){
         //get job1, job2 select the job objects
-        //job1Spinner.getSelectedItemPosition();
-        //job2Spinner.getSelectedItemPosition();
+        int index1 = job1Spinner.getSelectedItemPosition();
+        int index2 = job2Spinner.getSelectedItemPosition();
+        updateJob1Fields(jobList.get(index1));
+        updateJob2Fields(jobList.get(index2));
+
     }
 
     public void anotherComparison(View view){
