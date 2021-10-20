@@ -22,15 +22,16 @@ public class Controller {
         locations = new ArrayList<Location>();
         databaseHandler = new DatabaseHandler(context);
         updateWeightsFromDb();
-
+        updateJobsFromDb();
     }
 
-    public void updateWeightsFromDb(){
-        //start DB handler
-//        this.jobOffers <------ this.dbhalder.getAllJobs(); arraylist<Strings>;
+    public void updateWeightsFromDb() {
         this.weights = databaseHandler.getWeights();
+    }
 
-
+    public void updateJobsFromDb() {
+        this.jobOffers = databaseHandler.getAllJobs();
+    }
 
         /* listen for menu selection
         handle selection accordingly
@@ -38,7 +39,6 @@ public class Controller {
          */
 
 
-    }
 
     public static LinkedList<Job> getSortedJobs(){
         jobOffers.updateJobScores(weights);
@@ -73,8 +73,11 @@ public class Controller {
             job.setLeaveDays(leaveDays);
             job.setGymAllowance(gymAllowance);
         }
+
+        // DB entry for Current Job
         boolean currentJob = true;
         databaseHandler.enterJob(job, currentJob);
+
         jobOffers.addOffer(job, weights, true);
     }
 
@@ -82,7 +85,12 @@ public class Controller {
                       int salary, int bonus, int teleworkDays, int leaveDays, int gymAllowance){
         addLocation(city, state, colIndex);
         Location location=getLocationByCityState(city,state);
-        // TODO add instance of Job job <---- here which will feed dbhandler.enterjob(job) and below function
+
+        // DB entries for Offers
+        Job job = new Job(title, company, location, salary, bonus, teleworkDays, leaveDays, gymAllowance);
+        boolean currentJob = false;
+        databaseHandler.enterJob(job, currentJob);
+
         jobOffers.addOffer(new Job(title, company, location, salary, bonus, teleworkDays, leaveDays,
                 gymAllowance), weights, false);
     }
