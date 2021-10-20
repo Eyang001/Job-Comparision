@@ -128,27 +128,34 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //        db.close();
 
 
-    public ArrayList<Job> getAllJobs() {
-        ArrayList<Job> arrayJobs = new ArrayList<>();
+    public JobOffers getAllJobs() {
+//        ArrayList<Job> jobs = new ArrayList<>();
+        JobOffers jobOffers = new JobOffers();
         db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_JOB;
         Cursor cursor =  db.rawQuery( query, null );
-
+        ComparisonWeights weights = this.getWeights();
+        boolean isCurrentJob = true;
         while(cursor.moveToNext()){ //while there are tuples remaining to check
             String title = cursor.getString(cursor.getColumnIndex(JOB_COL_TITLE));
             String company = cursor.getString(cursor.getColumnIndex(JOB_COL_COMPANY));
-//            Location location = new Location();
             String city = cursor.getString(cursor.getColumnIndex(JOB_COL_CITY));
             String state = cursor.getString(cursor.getColumnIndex(JOB_COL_STATE));
             int cost_living = cursor.getInt(cursor.getColumnIndex(JOB_COL_COST_LIVING));
+            Location location = new Location(city,state,cost_living);
             int salary = cursor.getInt(cursor.getColumnIndex(JOB_COL_SALARY));
             int bonus = cursor.getInt(cursor.getColumnIndex(JOB_COL_BONUS));
             int telework = cursor.getInt(cursor.getColumnIndex(JOB_COL_TELEWORK));
             int leave = cursor.getInt(cursor.getColumnIndex(JOB_COL_LEAVE));
             int gym = cursor.getInt(cursor.getColumnIndex(JOB_COL_GYM));
-//            Job job = new Job(title,company,location,salary,bonus,telework,leave,gym);
+
+            Job job = new Job(title,company,location,salary,bonus,telework,leave,gym);
+//            jobs.add(job);
+            jobOffers.addOffer(job,weights,isCurrentJob);
+            isCurrentJob = false;
         }
-        return arrayJobs;
+
+        return jobOffers;
     }
 
 
