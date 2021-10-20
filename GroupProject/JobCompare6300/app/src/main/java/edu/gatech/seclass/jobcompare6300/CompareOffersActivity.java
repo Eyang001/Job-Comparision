@@ -41,6 +41,7 @@ public class CompareOffersActivity extends AppCompatActivity {
     private ArrayList<String> jobTitleCompany;
     ArrayAdapter<?> adapter ;
     ArrayAdapter<?> adapter2;
+    public DatabaseHandler databaseHandler;
 
 
     @Override
@@ -65,13 +66,17 @@ public class CompareOffersActivity extends AppCompatActivity {
         job2Gym = (TextView) findViewById(R.id.gymJob2);
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
+        databaseHandler = new DatabaseHandler(this);
 
         // for testing below
-//        arrayList.add(new Job("test", "test", new Location("test","test",100),0,0,0, 0,0));
-//        arrayList.add(new Job("test2", "test2", new Location("test2","test2",100),0,0,0, 0,0));
+//        databaseHandler.enterJob(new Job("Arthur", "test55", new Location("test","test",100),0,0,0, 0,0));
+//
+//        databaseHandler.enterJob(new Job("Arthur2", "test2", new Location("test2","test2",100),0,0,0, 0,0));
 //        arrayList2.add(new Job("test3", "test3", new Location("test3","test3",100),0,0,0, 0,0));
 //        arrayList2.add(new Job("test4", "test4", new Location("test4","test4",100),0,0,0, 0,0));
 
+
+        ArrayList<String> jobs = databaseHandler.getAllJobs();
         jobList = new ArrayList<>(Controller.getSortedJobs());
         jobTitleCompany = getTitleCompany(jobList); //convert toString
 
