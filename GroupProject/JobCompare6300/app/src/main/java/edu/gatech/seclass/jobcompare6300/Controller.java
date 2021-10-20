@@ -22,6 +22,7 @@ public class Controller {
         locations = new ArrayList<Location>();
         databaseHandler = new DatabaseHandler(context);
         updateWeightsFromDb();
+
     }
 
     public void updateWeightsFromDb(){
@@ -72,7 +73,8 @@ public class Controller {
             job.setLeaveDays(leaveDays);
             job.setGymAllowance(gymAllowance);
         }
-        //TODO add dbhanlder.enterjob(job) here <--------------------
+        boolean currentJob = true;
+        databaseHandler.enterJob(job, currentJob);
         jobOffers.addOffer(job, weights, true);
     }
 
