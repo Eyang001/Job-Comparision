@@ -87,6 +87,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.setVersion(oldVersion);
+    }
+
     public void enterJob(Job job){
         db = this.getWritableDatabase();
         values = new ContentValues();
@@ -103,22 +108,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void setWeights(int salaryWeight, int bonusWeight, int teleWeight, int leaveWeight, int gymWeight){
+    public void setWeights(ComparisonWeights weights){
         db = this.getWritableDatabase();
         values = new ContentValues();
-        values.put(WEIGHTS_COL_SALARY, salaryWeight);
-        values.put(WEIGHTS_COL_BONUS, bonusWeight);
-        values.put(WEIGHTS_COL_TELEWORK, teleWeight);
-        values.put(WEIGHTS_COL_LEAVE, leaveWeight);
-        values.put(WEIGHTS_COL_GYM, gymWeight);
-        int id = 1;
-        db.insert(TABLE_COMPARISON_WEIGHTS, null,values);
-        //        db.update(TABLE_COMPARISON_WEIGHTS, values, WEIGHTS_ID+" = ?",new String[]{String.valueOf(id)});
-//        db.close();
+        values.put(WEIGHTS_COL_SALARY, weights.getYearlySalary());
+        values.put(WEIGHTS_COL_BONUS, weights.getYearlyBonus());
+        values.put(WEIGHTS_COL_TELEWORK, weights.getTeleDays());
+        values.put(WEIGHTS_COL_LEAVE, weights.getLeaveDays());
+        values.put(WEIGHTS_COL_GYM, weights.getGymAllowance());
+        db.update(TABLE_COMPARISON_WEIGHTS, values, WEIGHTS_ID+" = 1",null);
+//        db.close();  //UNCOMMENT after done testing!!!!
     }
 
-    public ArrayList<String> getAllJobs() {
+    public ComparisonWeights getWeights() {
+        ComparisonWeights weights = new ComparisonWeights();
+        db = this.getWritableDatabase();
+        String weightsQuery = "SELECT * FROM " + TABLE_COMPARISON_WEIGHTS;
+        Cursor weightsCursor = db.rawQuery(weightsQuery, null);
+        while (weightsCursor.moveToNext()) { //while there are tuples remaining to check
+            weights.setYearlySalary(Integer.parseInt(weightsCursor.getString(weightsCursor.getColumnIndex(WEIGHTS_COL_SALARY))));
+            weights.setYearlySalary(Integer.parseInt(weightsCursor.getString(weightsCursor.getColumnIndex(WEIGHTS_COL_BONUS))));
+            weights.setYearlySalary(Integer.parseInt(weightsCursor.getString(weightsCursor.getColumnIndex(WEIGHTS_COL_TELEWORK))));
+            weights.setYearlySalary(Integer.parseInt(weightsCursor.getString(weightsCursor.getColumnIndex(WEIGHTS_COL_LEAVE))));
+            weights.setYearlySalary(Integer.parseInt(weightsCursor.getString(weightsCursor.getColumnIndex(WEIGHTS_COL_GYM))));
+            //  db.close();  //UNCOMMENT after done testing!!!!
+        }
+        return weights;
+    }
 
+
+    public ArrayList<String> getAllJobs() {
         ArrayList<String> arrayJobs = new ArrayList<>();
         db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_JOB;
@@ -127,6 +146,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //            Job job = new Job();
             arrayJobs.add(cursor.getString(cursor.getColumnIndex(JOB_COL_TITLE)));
             arrayJobs.add(cursor.getString(cursor.getColumnIndex(JOB_COL_COMPANY)));
+
         }
         return arrayJobs;
     }
