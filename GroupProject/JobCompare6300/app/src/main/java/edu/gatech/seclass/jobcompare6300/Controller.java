@@ -21,12 +21,14 @@ public class Controller {
         weights = new ComparisonWeights();
         locations = new ArrayList<Location>();
         databaseHandler = new DatabaseHandler(context);
+        updateWeightsFromDb();
     }
 
-    public void populateFromDb(){
+    public void updateWeightsFromDb(){
         //start DB handler
 //        this.jobOffers <------ this.dbhalder.getAllJobs(); arraylist<Strings>;
-//        this.weights <------ list<weights>;
+        this.weights = databaseHandler.getWeights();
+
 
 
         /* listen for menu selection
@@ -90,8 +92,9 @@ public class Controller {
         weights.setLeaveDays(leaveWeight);
         weights.setGymAllowance(gymWeight);
         // add weights to DB
-        databaseHandler.setWeights(salaryWeight, bonusWeight, teleWeight, leaveWeight, gymWeight); // enter weights into DB
+        databaseHandler.setWeights(weights); // enter weights into DB
     }
+
 
     public static void compareOffers(View view){
         /* display activity_compare_jobs
