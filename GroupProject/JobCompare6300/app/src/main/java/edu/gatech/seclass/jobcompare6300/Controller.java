@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -11,15 +13,20 @@ public class Controller {
     private static JobOffers jobOffers;
     private static ComparisonWeights weights;
     private static ArrayList<Location> locations;
+    private static DatabaseHandler databaseHandler;
 
-    public Controller(){
+
+    public Controller(Context context){
         jobOffers = new JobOffers();
         weights = new ComparisonWeights();
         locations = new ArrayList<Location>();
+        databaseHandler = new DatabaseHandler(context);
     }
 
-    public void run(){
+    public void populateFromDb(){
         //start DB handler
+//        this.jobOffers <------ this.dbhalder.getAllJobs(); arraylist<Strings>;
+//        this.weights <------ list<weights>;
 
 
         /* listen for menu selection
@@ -63,6 +70,7 @@ public class Controller {
             job.setLeaveDays(leaveDays);
             job.setGymAllowance(gymAllowance);
         }
+        //TODO add dbhanlder.enterjob(job) here <--------------------
         jobOffers.addOffer(job, weights, true);
     }
 
@@ -70,7 +78,7 @@ public class Controller {
                       int salary, int bonus, int teleworkDays, int leaveDays, int gymAllowance){
         addLocation(city, state, colIndex);
         Location location=getLocationByCityState(city,state);
-
+        // TODO add instance of Job job <---- here which will feed dbhandler.enterjob(job) and below function
         jobOffers.addOffer(new Job(title, company, location, salary, bonus, teleworkDays, leaveDays,
                 gymAllowance), weights, false);
     }
@@ -81,6 +89,8 @@ public class Controller {
         weights.setTeleDays(teleWeight);
         weights.setLeaveDays(leaveWeight);
         weights.setGymAllowance(gymWeight);
+        // add weights to DB
+        databaseHandler.setWeights(salaryWeight, bonusWeight, teleWeight, leaveWeight, gymWeight); // enter weights into DB
     }
 
     public static void compareOffers(View view){
