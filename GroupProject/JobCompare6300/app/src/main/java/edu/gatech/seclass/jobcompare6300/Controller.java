@@ -30,6 +30,10 @@ public class Controller {
 
     }
 
+    public static int getNumJobs(){
+        return jobOffers.getNumJobs();
+    }
+
     public static LinkedList<Job> getSortedJobs(){
         jobOffers.updateJobScores(weights);
         return jobOffers.getSortedJobOffers();
@@ -83,11 +87,6 @@ public class Controller {
         weights.setGymAllowance(gymWeight);
     }
 
-    public static void compareOffers(View view){
-        /* display activity_compare_jobs
-         */
-    }
-
     //adds location if it does not exist, updates the cost of living index if the location does exist.
     private static void addLocation(String city, String state, int colIndex){
         //O(2n)
@@ -114,6 +113,4 @@ public class Controller {
         }
         return isStored;
     }
-
-
 }

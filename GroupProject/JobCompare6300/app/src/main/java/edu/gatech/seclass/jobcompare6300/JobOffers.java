@@ -26,18 +26,13 @@ public class JobOffers {
         update the value in ranked offers accordingly
         call sortJobOffers
          */
-
-        //if (!dirtyScores) {return};
-
         /* update score for each job offer */
         for(Map.Entry<Job, Float> pair : rankedJobOffers.entrySet()){
             float newScore = pair.getKey().getJobScore(weights);
             rankedJobOffers.put(pair.getKey(),newScore);
         }
-
         /* sort and update rankedJobOffers and rankedJobOffers */
         sortJobOffers();
-        //markScoresClean();
     }
 
     private void sortJobOffers(){
@@ -57,13 +52,6 @@ public class JobOffers {
         for(Map.Entry<Job, Float> pair : rankedJobOffers.entrySet()){
             sortedJobOffers.add(pair.getKey());
         }
-    }
-
-    public void markScoresDirty(){
-        this.dirtyScores=true;
-    }
-    private void markScoresClean(){
-        this.dirtyScores=false;
     }
 
     public void addOffer(Job job, ComparisonWeights weights, boolean isCurrentJob){
@@ -88,6 +76,12 @@ public class JobOffers {
         }
     }
 
+    public int getNumJobs(){
+        if(jobOffers.size()>=1 && getCurrentJob()==null){
+            return jobOffers.size()-1;
+        }
+        else return jobOffers.size();
+    }
 
     public Job getCurrentJob(){
         if(this.jobOffers.size()>0){
