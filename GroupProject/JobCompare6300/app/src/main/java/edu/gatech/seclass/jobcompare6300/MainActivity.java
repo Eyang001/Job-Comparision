@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         enterJobOfferButton = (Button) findViewById(R.id.enterJobOfferButton);
         adjustWeigthsButton = (Button) findViewById(R.id.adjustWeightsButton);
         compareOffersButton = (Button) findViewById(R.id.compareJobOffersButton);
+        enableCompareButton();
+
         exitButton = (Button) findViewById(R.id.exitButton);
         Toast.makeText(this.getApplicationContext(), "Welcome to the job compare app!", Toast.LENGTH_LONG).show();
     }
@@ -35,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
     public void editCurrentJob(View view){
         Intent intent = new Intent(this, EnterJobActivity.class); //start enter current job activity, pass it controller
         startActivity(intent);
+        enableCompareButton();
     }
 
     public void enterJobOffer(View view){
         Intent intent = new Intent(this, EnterJobOfferActivity.class);
         startActivity(intent);
+        enableCompareButton();
     }
 
     public void adjustComparisonWeights(View view){
@@ -54,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void exit(View view){
         this.finishAffinity();
+    }
+
+    private void enableCompareButton(){
+        if(Controller.getNumJobs()<2) compareOffersButton.setEnabled(false);
+        else compareOffersButton.setEnabled(true);
     }
 }
