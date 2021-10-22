@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.LinkedList;
 
 public class JobOffers {
     private ArrayList<Job> jobOffers;
     private HashMap<Job, Float> rankedJobOffers;
     private LinkedList<Job> sortedJobOffers;
-    private boolean dirtyScores; //used to indicate that the weights have been updated but not the scores
 
     public JobOffers(){
         this.jobOffers=new ArrayList<Job>(10);
         this.rankedJobOffers=new HashMap<Job, Float>();
         this.sortedJobOffers=new LinkedList<Job>();
-        dirtyScores = false;
     }
 
     public void updateJobScores(ComparisonWeights weights){
@@ -44,7 +42,7 @@ public class JobOffers {
         Collections.sort(list, new Comparator<Map.Entry<Job, Float>>()
             {
             public int compare(Map.Entry<Job, Float> o1, Map.Entry<Job, Float> o2) {
-                return o1.getValue().compareTo(o2.getValue());
+                return o2.getValue().compareTo(o1.getValue());
             }
         });
 
