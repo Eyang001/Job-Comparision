@@ -65,5 +65,38 @@ public class ActivitiesInstrumentedTests {
         onView(withId(R.id.gymField)).check(matches(withText("200")));
     }
 
-    
+    @Test
+    public void enterJobOffer() {
+        onView(withId(R.id.enterJobOfferButton)).perform(click());
+        onView(withId(R.id.titleField)).perform(typeText("Test plumber"), closeSoftKeyboard());
+        onView(withId(R.id.titleField)).check(matches(withText("Test plumber")));
+
+        onView(withId(R.id.companyField)).perform(typeText("Home depot"), closeSoftKeyboard());
+        onView(withId(R.id.companyField)).check(matches(withText("Home depot")));
+
+        onView(withId(R.id.cityField)).perform(typeText("Los Angeles"), closeSoftKeyboard());
+        onView(withId(R.id.cityField)).check(matches(withText("Los Angeles")));
+
+        onView(withId(R.id.stateField)).perform(typeText("California"), closeSoftKeyboard());
+        onView(withId(R.id.stateField)).check(matches(withText("California")));
+
+        onView(withId(R.id.colField)).perform(typeText("120"), closeSoftKeyboard());
+        onView(withId(R.id.colField)).check(matches(withText("120")));
+
+        onView(withId(R.id.salaryField)).perform(typeText("70000"), closeSoftKeyboard());
+        onView(withId(R.id.salaryField)).check(matches(withText("70000")));
+
+        onView(withId(R.id.bonusField)).perform(typeText("10000"), closeSoftKeyboard());
+        onView(withId(R.id.bonusField)).check(matches(withText("10000")));
+
+        onView(withId(R.id.teleworkField)).perform(typeText("0"), closeSoftKeyboard());
+        onView(withId(R.id.teleworkField)).check(matches(withText("0")));
+
+        onView(withId(R.id.leaveField)).perform(typeText("30"), closeSoftKeyboard());
+        onView(withId(R.id.leaveField)).check(matches(withText("30")));
+
+        onView(withId(R.id.gymField)).perform(typeText("0"), closeSoftKeyboard());
+        onView(withId(R.id.gymField)).check(matches(withText("0")));
+    }
+
 }
