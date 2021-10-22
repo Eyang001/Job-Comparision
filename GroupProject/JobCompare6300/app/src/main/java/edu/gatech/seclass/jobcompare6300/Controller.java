@@ -15,14 +15,22 @@ public class Controller {
     private static ArrayList<Location> locations;
     private static DatabaseHandler databaseHandler;
 
-
     public Controller(Context context){
         jobOffers = new JobOffers();
         weights = new ComparisonWeights();
         locations = new ArrayList<Location>();
-        databaseHandler = new DatabaseHandler(context);
-        updateWeightsFromDb();
-        updateJobsFromDb();
+        databaseHandler = DatabaseHandler.getInstance(context);
+
+        // RESET for entire database below **** do NOT uncomment, only for testing
+//         context.deleteDatabase("jobsManager.db");
+
+        // Try to load the DB if it already exists locally
+        try {
+            updateWeightsFromDb();
+            updateJobsFromDb();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateWeightsFromDb() {
@@ -73,12 +81,12 @@ public class Controller {
             job.setLeaveDays(leaveDays);
             job.setGymAllowance(gymAllowance);
         }
-
         // DB entry for Current Job
         boolean currentJob = true;
         databaseHandler.enterJob(job, currentJob);
 
         jobOffers.addOffer(job, weights, true);
+
     }
 
     public static void enterJobOffer(String title, String company, String city, String state, int colIndex,
