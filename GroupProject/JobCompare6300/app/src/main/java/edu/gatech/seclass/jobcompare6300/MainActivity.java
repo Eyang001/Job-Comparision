@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private Controller controller;
     private Button enterCurrentJobButton;
     private Button enterJobOfferButton;
-    private Button adjustWeigthsButton;
+    private Button adjustWeightsButton;
     private Button compareOffersButton;
     private Button exitButton;
     private boolean compareEnabled;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         enterCurrentJobButton = (Button) findViewById(R.id.enterCurrentJobButton);
         enterJobOfferButton = (Button) findViewById(R.id.enterJobOfferButton);
-        adjustWeigthsButton = (Button) findViewById(R.id.adjustWeightsButton);
+        adjustWeightsButton = (Button) findViewById(R.id.adjustWeightsButton);
         compareOffersButton = (Button) findViewById(R.id.compareJobOffersButton);
         compareEnabled = 2 <= Controller.getNumJobs();
         compareOffersButton.setEnabled(compareEnabled);

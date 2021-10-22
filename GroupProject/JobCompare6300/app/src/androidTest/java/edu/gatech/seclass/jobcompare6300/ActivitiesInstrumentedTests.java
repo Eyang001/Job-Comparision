@@ -1,6 +1,7 @@
 package edu.gatech.seclass.jobcompare6300;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -99,4 +100,22 @@ public class ActivitiesInstrumentedTests {
         onView(withId(R.id.gymField)).check(matches(withText("0")));
     }
 
+    @Test
+    public void enterAdjustWeights() {
+        onView(withId(R.id.adjustWeightsButton)).perform(click());
+        onView(withId(R.id.salaryField)).perform(clearText(), typeText("2"), closeSoftKeyboard());
+        onView(withId(R.id.salaryField)).check(matches(withText("2")));
+
+        onView(withId(R.id.bonusField)).perform(clearText(), typeText("3"), closeSoftKeyboard());
+        onView(withId(R.id.bonusField)).check(matches(withText("3")));
+
+        onView(withId(R.id.teleworkField)).perform(clearText(), typeText("6"), closeSoftKeyboard());
+        onView(withId(R.id.teleworkField)).check(matches(withText("6")));
+
+        onView(withId(R.id.leaveField)).perform(clearText(), typeText("4"), closeSoftKeyboard());
+        onView(withId(R.id.leaveField)).check(matches(withText("4")));
+
+        onView(withId(R.id.gymField)).perform(clearText(), typeText("5"), closeSoftKeyboard());
+        onView(withId(R.id.gymField)).check(matches(withText("5")));
+    }
 }
