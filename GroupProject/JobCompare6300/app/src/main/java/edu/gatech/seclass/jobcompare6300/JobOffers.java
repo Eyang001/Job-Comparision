@@ -66,20 +66,20 @@ public class JobOffers {
             if(jobOffers.size() == 0) {jobOffers.add(job);}
             else{jobOffers.set(0,job);}
         }
-        else if (!isCurrentJob){
+        else if (!isCurrentJob) {
             if (getCurrentJob() != null) {
                 jobOffers.add(jobOffers.size(), job);
             } else {
-                if(jobOffers.size() == 0) {
+                if (jobOffers.size() == 0) {
                     jobOffers.add(0, null);
                 }
                 jobOffers.add(jobOffers.size(), job);
             }
-
-            //calculate score and add to rankedJobOffers
-            float score = job.getJobScore(weights);
-            rankedJobOffers.put(job, score);
         }
+        //calculate score and add to rankedJobOffers
+        float score = job.getJobScore(weights);
+        rankedJobOffers.put(job, score);
+
     }
 
     public int getNumJobs(){

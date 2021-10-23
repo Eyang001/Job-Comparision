@@ -42,7 +42,6 @@ public class CompareOffersActivity extends AppCompatActivity {
     ArrayAdapter<?> adapter ;
     ArrayAdapter<?> adapter2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -65,12 +64,6 @@ public class CompareOffersActivity extends AppCompatActivity {
         job2Gym = (TextView) findViewById(R.id.gymJob2);
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
-
-        // for testing below
-//        arrayList.add(new Job("test", "test", new Location("test","test",100),0,0,0, 0,0));
-//        arrayList.add(new Job("test2", "test2", new Location("test2","test2",100),0,0,0, 0,0));
-//        arrayList2.add(new Job("test3", "test3", new Location("test3","test3",100),0,0,0, 0,0));
-//        arrayList2.add(new Job("test4", "test4", new Location("test4","test4",100),0,0,0, 0,0));
 
         jobList = new ArrayList<>(Controller.getSortedJobs());
         jobTitleCompany = getTitleCompany(jobList); //convert toString
@@ -98,7 +91,7 @@ public class CompareOffersActivity extends AppCompatActivity {
             }
         }
         catch(Exception ignored){
-
+          
         }
     }
 
