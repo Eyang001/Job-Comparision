@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        controller = new Controller();
+        controller = new Controller(getApplicationContext());
 
         enterCurrentJobButton = (Button) findViewById(R.id.enterCurrentJobButton);
         enterJobOfferButton = (Button) findViewById(R.id.enterJobOfferButton);

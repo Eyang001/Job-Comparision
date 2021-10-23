@@ -13,7 +13,8 @@ public class ControllerUnitTest {
     private Controller controller;
     @Before
     public void setup(){
-        controller = new Controller();
+        MainActivity main = new MainActivity();
+        controller = new Controller(main.getApplicationContext());
     }
     @Test
     public void addition_isCorrect() {
