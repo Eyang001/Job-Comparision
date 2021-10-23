@@ -99,7 +99,7 @@ public class CompareOffersActivity extends AppCompatActivity {
     private ArrayList<String> getTitleCompany(ArrayList<Job> sortedJobs) {
         ArrayList<String> arrayList = new ArrayList<String>();
         for(Job j : sortedJobs){
-            arrayList.add(j.getTitle()+" | "+j.getCompany());
+            arrayList.add(j.getTitle()+" | "+j.getCompany()+" | "+Controller.getJobScore(j));
         }
         return arrayList;
     }
