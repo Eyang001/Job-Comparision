@@ -34,11 +34,11 @@ public class Controller {
     }
 
     public void updateWeightsFromDb() {
-        this.weights = databaseHandler.getWeights();
+        weights = databaseHandler.getWeights();
     }
 
     public void updateJobsFromDb() {
-        this.jobOffers = databaseHandler.getAllJobs();
+        jobOffers = databaseHandler.getAllJobs();
     }
 
     public static int getNumJobs(){
