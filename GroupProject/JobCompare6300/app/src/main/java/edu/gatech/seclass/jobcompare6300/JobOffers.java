@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class JobOffers {
             float newScore = pair.getKey().getJobScore(weights);
             rankedJobOffers.put(pair.getKey(),newScore);
         }
-        /* sort and update rankedJobOffers and rankedJobOffers */
+        /* sort job offers by score in descending order and populate sortedJobOffers */
         sortJobOffers();
     }
 
@@ -37,17 +38,24 @@ public class JobOffers {
         /* purge sortedJobOffers */
         sortedJobOffers.clear();
 
-        /* sort rankedJobOffers */
+        /* sort offers and saved into sortedMap*/
+
         List<Map.Entry<Job, Float>> list = new LinkedList<>(rankedJobOffers.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Job, Float>>()
-            {
+        {
             public int compare(Map.Entry<Job, Float> o1, Map.Entry<Job, Float> o2) {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });
 
+        Map<Job, Float> sortedMap = new LinkedHashMap<Job, Float>();
+
+        for (Map.Entry<Job, Float> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
         /* add sorted results back to sortedJobOffers */
-        for(Map.Entry<Job, Float> pair : rankedJobOffers.entrySet()){
+        for(Map.Entry<Job, Float> pair : sortedMap.entrySet()){
             sortedJobOffers.add(pair.getKey());
         }
     }
