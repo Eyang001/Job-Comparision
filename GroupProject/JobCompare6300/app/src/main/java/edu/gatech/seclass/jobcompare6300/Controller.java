@@ -41,12 +41,15 @@ public class Controller {
         this.jobOffers = databaseHandler.getAllJobs();
     }
 
-        /* listen for menu selection
-        handle selection accordingly
-        loop
-         */
+    public static LinkedList<Job> getSortedJobs(){
+        jobOffers.updateJobScores(weights);
+        return jobOffers.getSortedJobOffers();
+    }
+    public static Job getCurrentJob(){return jobOffers.getCurrentJob();}
 
-
+    public static int getNumJobs(){
+        return jobOffers.getNumJobs();
+    }
 
     public static LinkedList<Job> getSortedJobs(){
         jobOffers.updateJobScores(weights);
@@ -55,7 +58,7 @@ public class Controller {
     public static Job getCurrentJob(){return jobOffers.getCurrentJob();}
 
     public static Job getLatestOffer(){return jobOffers.getLastSavedJobOffer();}
-
+  
     public static Location getLocationByCityState(String city, String state){
         for (Location l: locations){
             if(l.getCity() == city && l.getState()==state) return l;
@@ -82,8 +85,7 @@ public class Controller {
             job.setGymAllowance(gymAllowance);
         }
         // DB entry for Current Job
-        boolean currentJob = true;
-        databaseHandler.enterJob(job, currentJob);
+        databaseHandler.enterJob(job, true);
 
         jobOffers.addOffer(job, weights, true);
 
@@ -113,12 +115,6 @@ public class Controller {
         databaseHandler.setWeights(weights); // enter weights into DB
     }
 
-
-    public static void compareOffers(View view){
-        /* display activity_compare_jobs
-         */
-    }
-
     //adds location if it does not exist, updates the cost of living index if the location does exist.
     private static void addLocation(String city, String state, int colIndex){
         //O(2n)
@@ -145,6 +141,4 @@ public class Controller {
         }
         return isStored;
     }
-
-
 }

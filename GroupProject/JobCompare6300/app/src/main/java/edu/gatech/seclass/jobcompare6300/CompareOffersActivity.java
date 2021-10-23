@@ -91,7 +91,7 @@ public class CompareOffersActivity extends AppCompatActivity {
             }
         }
         catch(Exception ignored){
-
+          
         }
     }
 

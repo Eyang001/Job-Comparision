@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.LinkedList;
 
 public class JobOffers {
     private ArrayList<Job> jobOffers;
     private HashMap<Job, Float> rankedJobOffers;
     private LinkedList<Job> sortedJobOffers;
-    private boolean dirtyScores; //used to indicate that the weights have been updated but not the scores
 
     public JobOffers(){
         this.jobOffers=new ArrayList<Job>(10);
         this.rankedJobOffers=new HashMap<Job, Float>();
         this.sortedJobOffers=new LinkedList<Job>();
-        dirtyScores = false;
     }
 
     public void updateJobScores(ComparisonWeights weights){
@@ -26,44 +25,39 @@ public class JobOffers {
         update the value in ranked offers accordingly
         call sortJobOffers
          */
-
-        //if (!dirtyScores) {return};
-
         /* update score for each job offer */
         for(Map.Entry<Job, Float> pair : rankedJobOffers.entrySet()){
             float newScore = pair.getKey().getJobScore(weights);
             rankedJobOffers.put(pair.getKey(),newScore);
         }
-
-        /* sort and update rankedJobOffers and rankedJobOffers */
+        /* sort job offers by score in descending order and populate sortedJobOffers */
         sortJobOffers();
-        //markScoresClean();
     }
 
     private void sortJobOffers(){
         /* purge sortedJobOffers */
         sortedJobOffers.clear();
 
-        /* sort rankedJobOffers */
+        /* sort offers and saved into sortedMap*/
+
         List<Map.Entry<Job, Float>> list = new LinkedList<>(rankedJobOffers.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Job, Float>>()
-            {
+        {
             public int compare(Map.Entry<Job, Float> o1, Map.Entry<Job, Float> o2) {
-                return o1.getValue().compareTo(o2.getValue());
+                return o2.getValue().compareTo(o1.getValue());
             }
         });
 
+        Map<Job, Float> sortedMap = new LinkedHashMap<Job, Float>();
+
+        for (Map.Entry<Job, Float> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
         /* add sorted results back to sortedJobOffers */
-        for(Map.Entry<Job, Float> pair : rankedJobOffers.entrySet()){
+        for(Map.Entry<Job, Float> pair : sortedMap.entrySet()){
             sortedJobOffers.add(pair.getKey());
         }
-    }
-
-    public void markScoresDirty(){
-        this.dirtyScores=true;
-    }
-    private void markScoresClean(){
-        this.dirtyScores=false;
     }
 
     public void addOffer(Job job, ComparisonWeights weights, boolean isCurrentJob){
@@ -88,6 +82,12 @@ public class JobOffers {
 
     }
 
+    public int getNumJobs(){
+        if(jobOffers.size()>=1 && getCurrentJob()==null){
+            return jobOffers.size()-1;
+        }
+        else return jobOffers.size();
+    }
 
     public Job getCurrentJob(){
         if(this.jobOffers.size()>0){

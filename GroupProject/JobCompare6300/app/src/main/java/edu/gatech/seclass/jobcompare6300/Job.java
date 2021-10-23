@@ -55,11 +55,11 @@ public class Job {
         float leaveWeight = (float) weights.getLeaveDays()/sumWeights;
         float gymWeight = (float) weights.getGymAllowance()/sumWeights;
 
-        float AYS = this.getSalary() * this.getLocationCostOfLivingIndex();
-        float AYB = this.getBonus() * this.getLocationCostOfLivingIndex();
+        float AYS = (this.getSalary() / (this.getLocationCostOfLivingIndex() / 100.0f));
+        float AYB = (this.getBonus() / (this.getLocationCostOfLivingIndex() / 100.0f));
         score =  AYS * yearlySalaryWeight + AYB * yearlyBonusWeight
                 + this.getGymAllowance() * gymWeight + (this.getLeaveDays() * AYS / 260) * leaveWeight
-                + ((260 - 52 * this.getTeleworkDays()) * (AYS / 260) / 8) * teleDaysWeight;
+                - ((260 - 52 * this.getTeleworkDays()) * (AYS / 260) / 8) * teleDaysWeight;
 
         return score;
     }
