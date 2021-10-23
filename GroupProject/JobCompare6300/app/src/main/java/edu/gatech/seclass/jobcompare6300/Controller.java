@@ -41,12 +41,6 @@ public class Controller {
         this.jobOffers = databaseHandler.getAllJobs();
     }
 
-    public static LinkedList<Job> getSortedJobs(){
-        jobOffers.updateJobScores(weights);
-        return jobOffers.getSortedJobOffers();
-    }
-    public static Job getCurrentJob(){return jobOffers.getCurrentJob();}
-
     public static int getNumJobs(){
         return jobOffers.getNumJobs();
     }
