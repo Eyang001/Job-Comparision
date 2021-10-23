@@ -124,12 +124,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.setVersion(oldVersion);
     }
 
-    public void enterJob(Job job, boolean currentJob){
-        // Query db first to determibe if it is empty and provide Cursor object
+    public void enterJob(Job job, boolean currentJob) {
+        // Query db first to determine if it is empty and provide Cursor object
         String query = "SELECT * FROM " + TABLE_JOB;
-        Cursor cursor =  db.rawQuery( query, null );
-
         db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
         values = new ContentValues();
         values.put(JOB_COL_TITLE, job.getTitle());
         values.put(JOB_COL_COMPANY, job.getCompany());
@@ -143,50 +143,46 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(JOB_COL_GYM, job.getGymAllowance());
 
         // case: enter current job and there are at least 1 jobs in table
-        if (currentJob && cursor.getCount() > 0){
-            db.update(TABLE_JOB, values, JOB_ID+" = 1",null);}
-        // case: enter current job first and there are no jobs in table
-        else if (currentJob && cursor.getCount() == 0){
-            db.insert(TABLE_JOB, null, values);}
-        // case: enter job offer first and there are no jobs in table before entering current job
-        else if (!currentJob && cursor.getCount() == 0){ // enter nulls for first row if we don't have a current job
-            db.execSQL("INSERT INTO " + TABLE_JOB + " ("+ JOB_COL_TITLE+","+JOB_COL_COMPANY+","
-                    +JOB_COL_CITY+","+JOB_COL_STATE+","+JOB_COL_COST_LIVING+","+JOB_COL_SALARY+","
-                    +JOB_COL_BONUS+","+JOB_COL_TELEWORK+","+JOB_COL_LEAVE+","+JOB_COL_GYM
-                    +") VALUES ("+"NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);");
-            db.insert(TABLE_JOB, null, values);}
-        else {
-            db.insert(TABLE_JOB, null, values);}
+        if (currentJob && cursor.getCount() > 0) {
+            db.update(TABLE_JOB, values, JOB_ID + " = 1", null);
         }
-        // TODO        db.close(); uncomment after testing
+        // case: enter current job first and there are no jobs in table
+        else if (currentJob && cursor.getCount() == 0) {
+            db.insert(TABLE_JOB, null, values);
+        }
+        // case: enter job offer first and there are no jobs in table before entering current job
+        else if (!currentJob && cursor.getCount() == 0) { // enter nulls for first row if we don't have a current job
+            db.execSQL("INSERT INTO " + TABLE_JOB + " (" + JOB_COL_TITLE + "," + JOB_COL_COMPANY + ","
+                    + JOB_COL_CITY + "," + JOB_COL_STATE + "," + JOB_COL_COST_LIVING + "," + JOB_COL_SALARY + ","
+                    + JOB_COL_BONUS + "," + JOB_COL_TELEWORK + "," + JOB_COL_LEAVE + "," + JOB_COL_GYM
+                    + ") VALUES (" + "NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);");
+            db.insert(TABLE_JOB, null, values);
+        } else {
+            db.insert(TABLE_JOB, null, values);
+        }
+        updateCostLiving(job, db);
+//        db.close();
+    }
 
-//    public void enterLocation(Job job) {
-//        // Query db first to determibe if it is empty and provide Cursor object
-//        String city = job.getLocationCity();
-//        String state = job.getLocationState();
-//        String query = "SELECT city, state FROM " + TABLE_LOCATION + " WHERE "
-//                + " city = " + city +" AND state = " + state;
-//
-//        Cursor cursor = db.rawQuery(query, null);
-//        int index = 0;
-//        try {
-//            index = cursor.getInt(cursor.getColumnIndex(LOCATION_ID));
-//        } catch(Exception e){};
-//
-//        db = this.getWritableDatabase();
-//        values = new ContentValues();
-//        values.put(LOCATION_COL_CITY, job.getLocationCity());
-//        values.put(LOCATION_COL_STATE, job.getLocationState());
-//        values.put(LOCATION_COL_COST_LIVING, job.getLocationCostOfLivingIndex());
-//
-//        // case: proposed location in table that don't exist
-//        if (cursor.getCount() > 0){
-//            db.update(TABLE_JOB, values, LOCATION_ID+" = "+ index,null);}
-//        // case: proposed location does not exist in Location table
-//        else if (cursor.getCount() == 0){
-//            db.insert(TABLE_JOB, null, values);}
-//
-//    }
+    public void updateCostLiving(Job job, SQLiteDatabase db){
+        String cityTest = job.getLocationCity();
+        String stateTest = job.getLocationState();
+        int newCostLiving = job.getLocationCostOfLivingIndex();
+
+        Cursor cursorLocation = db.rawQuery("SELECT id, city, state, cost_of_living FROM job WHERE city=? AND state=?;", new String[] {cityTest, stateTest});
+        values = new ContentValues();
+
+        while(cursorLocation.moveToNext()){ //while there are tuples remaining to check
+            int oldCostLiving = cursorLocation.getInt(cursorLocation.getColumnIndex(JOB_COL_COST_LIVING));
+            String jobID = cursorLocation.getString(cursorLocation.getColumnIndex(JOB_ID));
+            if (newCostLiving != oldCostLiving) {
+                values.put(JOB_COL_COST_LIVING, newCostLiving);
+                db.update(TABLE_JOB, values, JOB_ID + "=" + jobID, null);
+                int updatedCostLiving = cursorLocation.getInt(cursorLocation.getColumnIndex(JOB_COL_COST_LIVING));
+                System.out.println(updatedCostLiving);
+            }
+        }
+    }
 
 
         public JobOffers getAllJobs() {
