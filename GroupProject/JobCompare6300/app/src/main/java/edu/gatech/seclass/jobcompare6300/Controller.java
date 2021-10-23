@@ -44,6 +44,9 @@ public class Controller {
     public static int getNumJobs(){
         return jobOffers.getNumJobs();
     }
+    public static float getJobScore(Job job){
+        return jobOffers.getJobScore(job);
+    }
 
     public static LinkedList<Job> getSortedJobs(){
         jobOffers.updateJobScores(weights);
