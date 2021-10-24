@@ -128,8 +128,8 @@ public class CompareOffersActivity extends AppCompatActivity {
     }
 
     private void updateJob1Fields(Job job){
-        job1Salary.setText(String.valueOf(job.getSalary()));
-        job1Bonus.setText(String.valueOf(job.getBonus()));
+        job1Salary.setText(String.valueOf(job.getAYS()));
+        job1Bonus.setText(String.valueOf(job.getAYB()));
         String loc = job.getLocationCity()+", "+job.getLocationState()+": "+job.getLocationCostOfLivingIndex();
         job1Location.setText(loc);
         job1Title.setText(job.getTitle());
@@ -139,8 +139,8 @@ public class CompareOffersActivity extends AppCompatActivity {
         job1Gym.setText(String.valueOf(job.getGymAllowance()));
     }
     private void updateJob2Fields(Job job){
-        job2Salary.setText(String.valueOf(job.getSalary()));
-        job2Bonus.setText(String.valueOf(job.getBonus()));
+        job2Salary.setText(String.valueOf(job.getAYS()));
+        job2Bonus.setText(String.valueOf(job.getAYB()));
         String loc = job.getLocationCity()+", "+job.getLocationState()+": "+job.getLocationCostOfLivingIndex();
         job2Location.setText(loc);
         job2Title.setText(job.getTitle());
