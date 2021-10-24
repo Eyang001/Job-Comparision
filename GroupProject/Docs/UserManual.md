@@ -1,4 +1,10 @@
-# User Manual for Job Compare App
+# User Manual for Job Compare App (Version 2)
+
+## Change Log
+
+* Add information to Compare Job Offers section to explain that spinner drop down menu will show jobs as Title, Company, and Job Score (Oct. 23, 2021)
+* Add information to Compare Job Offers section to explain that current job will be clearly indicated with asterisks around information in drop down menu (Oct. 23, 2021)
+
 
 ## System Environment
 * Application (app) is designed for the Pixel 4 XL with API level 29.
@@ -27,5 +33,5 @@ Upon selecting Adjust Comparison Weights from the main menu, a layout will be sh
 ## Compare Job Offers
 ![View](./images/CompareJobOffers-View.png)
 
-Upon selecting Compare Job Offers from the main menu, a layout will be shown to compare two jobs. Select the first job to be compared from the drop down menu on the left, from a ranked list of jobs based on job score. Select the second job to be compared from the drop down menu on the right, also ranked by job score. The jobs in the drop down menu will be displayed as Title and Company, ranked from best to worst, with the current job clearly indicated (if present). Once two jobs to be compared have been selected, press the Compare button to trigger the comparison; doing so will display Title, Company, Location, Yearly salary adjusted for cost of living, Yearly bonus adjusted for cost of living, Allowed weekly telework days, Leave time, and Gym Membership Allowance in the table below, with the data of the first job on the left and the data of the second job on the right, with a column between signifying what each row of data represents. Press the Another Comparison button to reset the table of values to do another comparison, by choosing from the drop down menus once again and repeating the instructions above. Press the Main Menu button to return to the main menu.
+Upon selecting Compare Job Offers from the main menu, a layout will be shown to compare two jobs. Select the first job to be compared from the drop down menu on the left, from a ranked list of jobs based on job score. Select the second job to be compared from the drop down menu on the right, also ranked by job score. The jobs in the drop down menu will be displayed as Title, Company, and Job Score ranked from best to worst, with the current job clearly indicated (if present) with two asterisks, on each side, around its information. Once two jobs to be compared have been selected, press the Compare button to trigger the comparison; doing so will display Title, Company, Location, Yearly salary adjusted for cost of living, Yearly bonus adjusted for cost of living, Allowed weekly telework days, Leave time, and Gym Membership Allowance in the table below, with the data of the first job on the left and the data of the second job on the right, with a column between signifying what each row of data represents. Press the Another Comparison button to reset the table of values to do another comparison, by choosing from the drop down menus once again and repeating the instructions above. Press the Main Menu button to return to the main menu.
 
