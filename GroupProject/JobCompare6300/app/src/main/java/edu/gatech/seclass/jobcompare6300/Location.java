@@ -1,8 +1,8 @@
 package edu.gatech.seclass.jobcompare6300;
 
 public class Location {
-    private String city;
-    private String state;
+    private final String city;
+    private final String state;
     private int costOfLivingIndex;
 
     public Location(String city, String state, int colIndex){

@@ -18,7 +18,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // https://www.tutlane.com/tutorial/android/android-sqlite-database-with-examples
 
     private static SQLiteDatabase db;
-    private static SQLiteOpenHelper helper;
     private static ContentValues values;
 
     // DB Name
@@ -28,7 +27,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Tables
     public static final String TABLE_JOB = "job";
     public static final String TABLE_COMPARISON_WEIGHTS = "comparison_weights";
-//    public static final String TABLE_LOCATION = "location";
 
     // Job Table Columns
     private static final String JOB_ID = "id";
@@ -51,12 +49,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String WEIGHTS_COL_LEAVE  = "leaveDays";
     private static final String WEIGHTS_COL_GYM = "gymAllowance";
 
-    // Location Table Columns
-//    private static final String LOCATION_ID = "loc_id";
-//    private static final String LOCATION_COL_CITY = "city";
-//    private static final String LOCATION_COL_STATE = "state";
-//    private static final String LOCATION_COL_COST_LIVING = "cost_of_living";
-
     // Job Table create statement
     private static final String CREATE_JOB_TABLE = "CREATE TABLE " + TABLE_JOB + "("
             + JOB_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -66,22 +58,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + " INTEGER," + JOB_COL_TELEWORK + " INTEGER," +  JOB_COL_LEAVE
             + " INTEGER," + JOB_COL_GYM + " INTEGER)";
 
-            // TODO I tried to add foreign key references to db but it keeps breaking, I recommend we revisit location class
-            // + JOB_LOCATION_ID + "INTEGER, "
-            //+ "FOREIGN KEY (" + JOB_LOCATION_ID + ") REFERENCES " + TABLE_LOCATION + "(LOCATION_ID))";
-
     // ComparisonWeights Table create statement
     private static final String CREATE_COMPARISON_WEIGHTS_TABLE = "CREATE TABLE " + TABLE_COMPARISON_WEIGHTS + "("
             + WEIGHTS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + WEIGHTS_COL_SALARY + " INTEGER," + WEIGHTS_COL_BONUS + " INTEGER,"
             + WEIGHTS_COL_TELEWORK + " INTEGER," + WEIGHTS_COL_LEAVE + " INTEGER,"
             + WEIGHTS_COL_GYM +" INTEGER" + ")";
-
-    // Location Table create statement
-//    private static final String CREATE_LOCATION_TABLE = "CREATE TABLE " + TABLE_LOCATION + "("
-//            + LOCATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-//            + LOCATION_COL_CITY + " TEXT," + LOCATION_COL_STATE + " TEXT,"
-//            + LOCATION_COL_COST_LIVING + " INTEGER" + ")";
 
     private static DatabaseHandler instance;
 
@@ -96,26 +78,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DB_VERSION);
     }
 
-//     Enforce foreign key constraints
-//    @Override
-//    public void onOpen(SQLiteDatabase db) {
-//        super.onOpen(db);
-//        // Enable foreign key constraints
-//        db.execSQL("PRAGMA foreign_keys=ON;");
-//    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_JOB_TABLE);
         db.execSQL(CREATE_COMPARISON_WEIGHTS_TABLE);
-//        db.execSQL(CREATE_LOCATION_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOB);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMPARISON_WEIGHTS);
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOCATION);
         onCreate(db);
     }
 
@@ -127,7 +99,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void enterJob(Job job, boolean currentJob) {
         // Query db first to determine if it is empty and provide Cursor object
         String query = "SELECT * FROM " + TABLE_JOB;
-        db = this.getWritableDatabase();
+        db = getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         values = new ContentValues();
@@ -161,7 +133,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.insert(TABLE_JOB, null, values);
         }
         updateCostLiving(job, db);
-//        db.close();
+        //db.close();
     }
 
     public void updateCostLiving(Job job, SQLiteDatabase db){
@@ -212,11 +184,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             jobOffers.addOffer(job,weights,isCurrentJob);
             isCurrentJob = false;
         }
+        //db.close();
         return jobOffers;
     }
 
     public void setWeights(ComparisonWeights weights){
-        // Query db first to determibe if it is empty and provide Cursor object
+        // Query db first to determine if it is empty and provide Cursor object
         String query = "SELECT * FROM " + TABLE_COMPARISON_WEIGHTS;
         Cursor cursor =  db.rawQuery( query, null );
         db = this.getWritableDatabase();
@@ -231,7 +204,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else {
             db.update(TABLE_COMPARISON_WEIGHTS, values, WEIGHTS_ID + " = 1", null);
         }
-        // TODO       db.close();  //UNCOMMENT after done testing!!!!
+        //db.close();
     }
 
     public ComparisonWeights getWeights() {
@@ -245,17 +218,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             weights.setTeleDays(weightsCursor.getInt(weightsCursor.getColumnIndex(WEIGHTS_COL_TELEWORK)));
             weights.setLeaveDays(weightsCursor.getInt(weightsCursor.getColumnIndex(WEIGHTS_COL_LEAVE)));
             weights.setGymAllowance(weightsCursor.getInt(weightsCursor.getColumnIndex(WEIGHTS_COL_GYM)));
-            // TODO  db.close();  //UNCOMMENT after done testing!!!!
         }
+        //db.close();
         return weights;
     }
 
     public void deleteDatabase(String Table) {
         String clearDBQuery = "DELETE FROM "+Table;
-        this.db.execSQL(clearDBQuery);
+        db.execSQL(clearDBQuery);
 
         String clearAutoIncrement = "DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + Table + "'";
-        this.db.execSQL(clearAutoIncrement);
+        db.execSQL(clearAutoIncrement);
+        //db.close();
     }
 
 
