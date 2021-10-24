@@ -1,6 +1,10 @@
-# Test Plan
+# Test Plan (Version 2)
 
 **Author**: Team100
+## Change Log
+
+* Added instructions for automated tests, section 1.6 (Oct. 23, 2021)
+* Edited Test Cases section 2 with additional tests and included updated results (Oct. 23, 2021)
 
 ## 1 Testing Strategy
 
@@ -35,6 +39,12 @@ We will use [GitHub Issues](https://github.gatech.edu/gt-omscs-se-2021fall/6300F
 - [Checkstyle](https://checkstyle.org/) 
 - [CodeQL](https://codeql.github.com/docs/)
 - [Monkey](https://developer.android.com/studio/test/monkey)
+
+### 1.6 Instructions for Running Automated Tests
+* JUnit 4+
+  * Find the unit test files in JobCompare6300/app/src/test/java/edu/gatech/seclass/jobcompare6300 and either run all by right clicking the folder in Android Studio and selecting Run or right click the individual files and Run each one individually.
+* Espresso (UI Tests)
+  * Find the test files in JobCompare6300/app/src/androidTest/java/edu/gatech/seclass/jobcompare6300 and either run all by right clicking the folder in Android Studio and selecting Run or right click the individual files and Run each one individually.
 
 ## 2 Test Cases
 
