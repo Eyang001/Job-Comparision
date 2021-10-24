@@ -10,9 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AdjustWeightsActivity extends AppCompatActivity {
-    private Controller controller;
-    private Button saveButton;
-    private Button cancelButton;
     private EditText salaryField;
     private EditText bonusField;
     private EditText teleworkField;
@@ -23,9 +20,6 @@ public class AdjustWeightsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adjust_comparison_weights);
-
-        saveButton = (Button) findViewById(R.id.saveButton);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
 
         salaryField = (EditText) findViewById(R.id.salaryField);
         bonusField = (EditText) findViewById(R.id.bonusField);
@@ -49,7 +43,7 @@ public class AdjustWeightsActivity extends AppCompatActivity {
             int teleWeight = Integer.parseInt(teleworkField.getText().toString());
             int leaveWeight = Integer.parseInt(leaveField.getText().toString());
             int gymWeight = Integer.parseInt(gymField.getText().toString());
-            controller.adjustWeights(salaryWeight, bonusWeight, teleWeight, leaveWeight, gymWeight);
+            Controller.adjustWeights(salaryWeight, bonusWeight, teleWeight, leaveWeight, gymWeight);
             Toast.makeText(this.getApplicationContext(), "Saving new weights", Toast.LENGTH_LONG).show();
             this.finish();
         }
