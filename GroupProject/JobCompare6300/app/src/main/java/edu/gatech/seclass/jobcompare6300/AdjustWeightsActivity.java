@@ -35,17 +35,84 @@ public class AdjustWeightsActivity extends AppCompatActivity {
     }
 
     public void save(View view){
-        int salaryWeight = Integer.parseInt(salaryField.getText().toString());
-        int bonusWeight = Integer.parseInt(bonusField.getText().toString());
-        int teleWeight = Integer.parseInt(teleworkField.getText().toString());
-        int leaveWeight = Integer.parseInt(leaveField.getText().toString());
-        int gymWeight = Integer.parseInt(gymField.getText().toString());
-        controller.adjustWeights(salaryWeight, bonusWeight, teleWeight, leaveWeight, gymWeight);
-        Toast.makeText(this.getApplicationContext(), "Saving new weights", Toast.LENGTH_LONG).show();
-        this.finish();
+        if(validateFields(view)){
+            int salaryWeight = Integer.parseInt(salaryField.getText().toString());
+            int bonusWeight = Integer.parseInt(bonusField.getText().toString());
+            int teleWeight = Integer.parseInt(teleworkField.getText().toString());
+            int leaveWeight = Integer.parseInt(leaveField.getText().toString());
+            int gymWeight = Integer.parseInt(gymField.getText().toString());
+            controller.adjustWeights(salaryWeight, bonusWeight, teleWeight, leaveWeight, gymWeight);
+            Toast.makeText(this.getApplicationContext(), "Saving new weights", Toast.LENGTH_LONG).show();
+            this.finish();
+        }
     }
 
     public void cancel(View view){
         this.finish();
+    }
+
+    private boolean validateFields(View view){
+        boolean isValid=true;
+        try{
+            int salaryWeight = Integer.parseInt(salaryField.getText().toString());
+            if(salaryWeight<0){
+                salaryField.setError("Please enter a positive integer");
+                isValid=false;
+            }
+        }
+        catch(NumberFormatException e){
+            salaryField.setError("Please enter a positive integer");
+            isValid=false;
+        }
+
+        try{
+            int bonusWeight = Integer.parseInt(bonusField.getText().toString());
+            if(bonusWeight<0){
+                bonusField.setError("Please enter a positive integer");
+                isValid=false;
+            }
+        }
+        catch(NumberFormatException e){
+            bonusField.setError("Please enter a positive integer");
+            isValid=false;
+        }
+
+        try{
+            int teleWeight = Integer.parseInt(teleworkField.getText().toString());
+            if(teleWeight<0){
+                teleworkField.setError("Please enter a positive integer");
+                isValid=false;
+            }
+        }
+        catch(NumberFormatException e){
+            teleworkField.setError("Please enter a positive integer");
+            isValid=false;
+        }
+
+        try{
+            int leaveWeight = Integer.parseInt(leaveField.getText().toString());
+            if(leaveWeight<0){
+                leaveField.setError("Please enter a positive integer");
+                isValid=false;
+            }
+        }
+        catch(NumberFormatException e){
+            leaveField.setError("Please enter a positive integer");
+            isValid=false;
+        }
+
+        try{
+            int gymWeight = Integer.parseInt(gymField.getText().toString());
+            if(gymWeight<0){
+                gymField.setError("Please enter a positive integer");
+                isValid=false;
+            }
+        }
+        catch(NumberFormatException e){
+            gymField.setError("Please enter a positive integer");
+            isValid=false;
+        }
+
+        return isValid;
     }
 }
