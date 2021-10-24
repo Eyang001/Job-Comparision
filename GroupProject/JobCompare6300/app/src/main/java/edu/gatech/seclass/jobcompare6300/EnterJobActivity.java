@@ -111,7 +111,7 @@ public class EnterJobActivity extends AppCompatActivity {
 
         try{
             int salary = Integer.parseInt(salaryField.getText().toString());
-            if(salary<=0){
+            if(salary<0){
                 allFieldsValid=false;
                 salaryField.setError("Please enter a positive integer before saving");
             }
@@ -123,7 +123,7 @@ public class EnterJobActivity extends AppCompatActivity {
 
         try{
             int bonus = Integer.parseInt(bonusField.getText().toString());
-            if(bonus<=0){
+            if(bonus<0){
                 allFieldsValid=false;
                 bonusField.setError("Please enter a positive integer before saving");
             }

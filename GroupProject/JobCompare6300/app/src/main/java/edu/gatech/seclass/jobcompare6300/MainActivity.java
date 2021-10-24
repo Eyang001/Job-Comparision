@@ -13,22 +13,33 @@ public class MainActivity extends AppCompatActivity {
     private Controller controller;
     private Button enterCurrentJobButton;
     private Button enterJobOfferButton;
-    private Button adjustWeigthsButton;
+    private Button adjustWeightsButton;
     private Button compareOffersButton;
     private Button exitButton;
+    private boolean compareEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        controller = new Controller();
+        controller = new Controller(getApplicationContext());
 
         enterCurrentJobButton = (Button) findViewById(R.id.enterCurrentJobButton);
         enterJobOfferButton = (Button) findViewById(R.id.enterJobOfferButton);
-        adjustWeigthsButton = (Button) findViewById(R.id.adjustWeightsButton);
+        adjustWeightsButton = (Button) findViewById(R.id.adjustWeightsButton);
         compareOffersButton = (Button) findViewById(R.id.compareJobOffersButton);
+        compareEnabled = 2 <= Controller.getNumJobs();
+        compareOffersButton.setEnabled(compareEnabled);
+
         exitButton = (Button) findViewById(R.id.exitButton);
         Toast.makeText(this.getApplicationContext(), "Welcome to the job compare app!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        compareEnabled = 2 <= Controller.getNumJobs();
+        compareOffersButton.setEnabled(compareEnabled);
     }
 
     //https://developer.android.com/training/basics/firstapp/starting-activity
@@ -55,4 +66,5 @@ public class MainActivity extends AppCompatActivity {
     public void exit(View view){
         this.finishAffinity();
     }
+
 }
