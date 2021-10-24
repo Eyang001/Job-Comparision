@@ -35,34 +35,34 @@ public class ActivitiesInstrumentedTests {
     @Test
     public void enterCurrentJob() {
         onView(withId(R.id.enterCurrentJobButton)).perform(click());
-        onView(withId(R.id.titleField)).perform(typeText("Test engineer"), closeSoftKeyboard());
+        onView(withId(R.id.titleField)).perform(clearText(), typeText("Test engineer"), closeSoftKeyboard());
         onView(withId(R.id.titleField)).check(matches(withText("Test engineer")));
 
-        onView(withId(R.id.companyField)).perform(typeText("SpaceX"), closeSoftKeyboard());
+        onView(withId(R.id.companyField)).perform(clearText(), typeText("SpaceX"), closeSoftKeyboard());
         onView(withId(R.id.companyField)).check(matches(withText("SpaceX")));
 
-        onView(withId(R.id.cityField)).perform(typeText("Boca Chica"), closeSoftKeyboard());
+        onView(withId(R.id.cityField)).perform(clearText(), typeText("Boca Chica"), closeSoftKeyboard());
         onView(withId(R.id.cityField)).check(matches(withText("Boca Chica")));
 
-        onView(withId(R.id.stateField)).perform(typeText("Texas"), closeSoftKeyboard());
+        onView(withId(R.id.stateField)).perform(clearText(), typeText("Texas"), closeSoftKeyboard());
         onView(withId(R.id.stateField)).check(matches(withText("Texas")));
 
-        onView(withId(R.id.colField)).perform(typeText("70"), closeSoftKeyboard());
+        onView(withId(R.id.colField)).perform(clearText(), typeText("70"), closeSoftKeyboard());
         onView(withId(R.id.colField)).check(matches(withText("70")));
 
-        onView(withId(R.id.salaryField)).perform(typeText("100000"), closeSoftKeyboard());
+        onView(withId(R.id.salaryField)).perform(clearText(), typeText("100000"), closeSoftKeyboard());
         onView(withId(R.id.salaryField)).check(matches(withText("100000")));
 
-        onView(withId(R.id.bonusField)).perform(typeText("15000"), closeSoftKeyboard());
+        onView(withId(R.id.bonusField)).perform(clearText(), typeText("15000"), closeSoftKeyboard());
         onView(withId(R.id.bonusField)).check(matches(withText("15000")));
 
-        onView(withId(R.id.teleworkField)).perform(typeText("3"), closeSoftKeyboard());
+        onView(withId(R.id.teleworkField)).perform(clearText(), typeText("3"), closeSoftKeyboard());
         onView(withId(R.id.teleworkField)).check(matches(withText("3")));
 
-        onView(withId(R.id.leaveField)).perform(typeText("20"), closeSoftKeyboard());
+        onView(withId(R.id.leaveField)).perform(clearText(), typeText("20"), closeSoftKeyboard());
         onView(withId(R.id.leaveField)).check(matches(withText("20")));
 
-        onView(withId(R.id.gymField)).perform(typeText("200"), closeSoftKeyboard());
+        onView(withId(R.id.gymField)).perform(clearText(), typeText("200"), closeSoftKeyboard());
         onView(withId(R.id.gymField)).check(matches(withText("200")));
     }
 
