@@ -32,6 +32,14 @@ public class AdjustWeightsActivity extends AppCompatActivity {
         teleworkField = (EditText) findViewById(R.id.teleworkField);
         leaveField = (EditText) findViewById(R.id.leaveField);
         gymField = (EditText) findViewById(R.id.gymField);
+
+        ComparisonWeights weights = Controller.getWeights();
+
+        salaryField.setText(String.valueOf(weights.getYearlySalary()));
+        bonusField.setText(String.valueOf(weights.getYearlyBonus()));
+        teleworkField.setText(String.valueOf(weights.getTeleDays()));
+        leaveField.setText(String.valueOf(weights.getLeaveDays()));
+        gymField.setText(String.valueOf(weights.getGymAllowance()));
     }
 
     public void save(View view){

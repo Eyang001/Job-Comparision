@@ -22,7 +22,7 @@ public class Controller {
         databaseHandler = DatabaseHandler.getInstance(context);
 
         // RESET for entire database below **** do NOT uncomment, only for testing
-//         context.deleteDatabase("jobsManager.db");
+        // context.deleteDatabase("jobsManager.db");
 
         // Try to load the DB if it already exists locally
         try {
@@ -110,6 +110,10 @@ public class Controller {
         weights.setGymAllowance(gymWeight);
         // add weights to DB
         databaseHandler.setWeights(weights); // enter weights into DB
+    }
+
+    public static ComparisonWeights getWeights(){
+        return weights;
     }
 
     //adds location if it does not exist, updates the cost of living index if the location does exist.
