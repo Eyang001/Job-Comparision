@@ -100,9 +100,9 @@ public class CompareOffersActivity extends AppCompatActivity {
         ArrayList<String> arrayList = new ArrayList<String>();
         for(Job j : sortedJobs){
             if (j == Controller.getCurrentJob()) {
-                arrayList.add("**" + j.getTitle()+" | "+j.getCompany()+" | "+Controller.getJobScore(j) + "**");
+                arrayList.add("**" + j.getTitle()+" | "+j.getCompany()+" | "+(int)Controller.getJobScore(j) + "**");
             } else {
-                arrayList.add(j.getTitle() + " | " + j.getCompany() + " | " + Controller.getJobScore(j));
+                arrayList.add(j.getTitle() + " | " + j.getCompany() + " | " + (int)Controller.getJobScore(j));
             }
         }
         return arrayList;
