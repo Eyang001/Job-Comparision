@@ -117,7 +117,7 @@ public class Controller {
     }
 
     //adds location if it does not exist, updates the cost of living index if the location does exist.
-    private static void addLocation(String city, String state, int colIndex){
+    public static void addLocation(String city, String state, int colIndex){
         //O(2n)
         if(!locationIsStored(city,state)){
             locations.add(new Location(city, state, colIndex));
