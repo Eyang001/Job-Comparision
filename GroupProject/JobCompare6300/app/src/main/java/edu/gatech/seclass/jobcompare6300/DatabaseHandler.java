@@ -173,7 +173,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             String city = cursor.getString(cursor.getColumnIndex(JOB_COL_CITY));
             String state = cursor.getString(cursor.getColumnIndex(JOB_COL_STATE));
             int cost_living = cursor.getInt(cursor.getColumnIndex(JOB_COL_COST_LIVING));
-            Location location = new Location(city,state,cost_living);
+            Controller.addLocation(city, state, cost_living);
+            Location location = Controller.getLocationByCityState(city,state);
             int salary = cursor.getInt(cursor.getColumnIndex(JOB_COL_SALARY));
             int bonus = cursor.getInt(cursor.getColumnIndex(JOB_COL_BONUS));
             int telework = cursor.getInt(cursor.getColumnIndex(JOB_COL_TELEWORK));

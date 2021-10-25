@@ -58,7 +58,7 @@ public class Controller {
   
     public static Location getLocationByCityState(String city, String state){
         for (Location l: locations){
-            if(l.getCity() == city && l.getState()==state) return l;
+            if(l.getCity().equals(city) && l.getState().equals(state)) return l;
         }
         return null;
     }
@@ -85,9 +85,6 @@ public class Controller {
         databaseHandler.enterJob(job, true);
 
         jobOffers.addOffer(job, weights, true);
-
-        updateJobsFromDb();
-
     }
 
     public static void enterJobOffer(String title, String company, String city, String state, int colIndex,
@@ -102,9 +99,6 @@ public class Controller {
 
         jobOffers.addOffer(new Job(title, company, location, salary, bonus, teleworkDays, leaveDays,
                 gymAllowance), weights, false);
-
-        updateJobsFromDb();
-
     }
 
     public static void adjustWeights(int salaryWeight, int bonusWeight, int teleWeight, int leaveWeight, int gymWeight) {
@@ -122,7 +116,7 @@ public class Controller {
     }
 
     //adds location if it does not exist, updates the cost of living index if the location does exist.
-    private static void addLocation(String city, String state, int colIndex){
+    public static void addLocation(String city, String state, int colIndex){
         //O(2n)
         if(!locationIsStored(city,state)){
             locations.add(new Location(city, state, colIndex));
