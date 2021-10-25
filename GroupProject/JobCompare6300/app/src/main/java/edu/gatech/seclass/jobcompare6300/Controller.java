@@ -37,7 +37,7 @@ public class Controller {
         weights = databaseHandler.getWeights();
     }
 
-    public void updateJobsFromDb() {
+    public static void updateJobsFromDb() {
         jobOffers = databaseHandler.getAllJobs();
     }
 
@@ -86,6 +86,8 @@ public class Controller {
 
         jobOffers.addOffer(job, weights, true);
 
+        updateJobsFromDb();
+
     }
 
     public static void enterJobOffer(String title, String company, String city, String state, int colIndex,
@@ -100,6 +102,9 @@ public class Controller {
 
         jobOffers.addOffer(new Job(title, company, location, salary, bonus, teleworkDays, leaveDays,
                 gymAllowance), weights, false);
+
+        updateJobsFromDb();
+
     }
 
     public static void adjustWeights(int salaryWeight, int bonusWeight, int teleWeight, int leaveWeight, int gymWeight) {
