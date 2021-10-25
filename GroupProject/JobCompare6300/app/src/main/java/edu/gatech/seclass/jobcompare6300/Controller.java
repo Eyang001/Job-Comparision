@@ -85,7 +85,6 @@ public class Controller {
         databaseHandler.enterJob(job, true);
 
         jobOffers.addOffer(job, weights, true);
-
     }
 
     public static void enterJobOffer(String title, String company, String city, String state, int colIndex,
