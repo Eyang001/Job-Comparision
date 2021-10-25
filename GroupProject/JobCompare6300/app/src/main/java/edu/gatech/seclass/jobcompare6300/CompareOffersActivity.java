@@ -42,7 +42,6 @@ public class CompareOffersActivity extends AppCompatActivity {
     ArrayAdapter<?> adapter ;
     ArrayAdapter<?> adapter2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -65,12 +64,6 @@ public class CompareOffersActivity extends AppCompatActivity {
         job2Gym = (TextView) findViewById(R.id.gymJob2);
         job1Spinner = (Spinner) findViewById(R.id.spinner);
         job2Spinner = (Spinner) findViewById(R.id.spinner2);
-
-        // for testing below
-//        arrayList.add(new Job("test", "test", new Location("test","test",100),0,0,0, 0,0));
-//        arrayList.add(new Job("test2", "test2", new Location("test2","test2",100),0,0,0, 0,0));
-//        arrayList2.add(new Job("test3", "test3", new Location("test3","test3",100),0,0,0, 0,0));
-//        arrayList2.add(new Job("test4", "test4", new Location("test4","test4",100),0,0,0, 0,0));
 
         jobList = new ArrayList<>(Controller.getSortedJobs());
         jobTitleCompany = getTitleCompany(jobList); //convert toString
@@ -98,7 +91,7 @@ public class CompareOffersActivity extends AppCompatActivity {
             }
         }
         catch(Exception ignored){
-
+          
         }
     }
 
@@ -106,7 +99,11 @@ public class CompareOffersActivity extends AppCompatActivity {
     private ArrayList<String> getTitleCompany(ArrayList<Job> sortedJobs) {
         ArrayList<String> arrayList = new ArrayList<String>();
         for(Job j : sortedJobs){
-            arrayList.add(j.getTitle()+" | "+j.getCompany());
+            if (j == Controller.getCurrentJob()) {
+                arrayList.add("**" + j.getTitle()+" | "+j.getCompany()+" | "+(int)Controller.getJobScore(j) + "**");
+            } else {
+                arrayList.add(j.getTitle() + " | " + j.getCompany() + " | " + (int)Controller.getJobScore(j));
+            }
         }
         return arrayList;
     }
@@ -131,8 +128,8 @@ public class CompareOffersActivity extends AppCompatActivity {
     }
 
     private void updateJob1Fields(Job job){
-        job1Salary.setText(String.valueOf(job.getSalary()));
-        job1Bonus.setText(String.valueOf(job.getBonus()));
+        job1Salary.setText(String.valueOf(job.getAYS()));
+        job1Bonus.setText(String.valueOf(job.getAYB()));
         String loc = job.getLocationCity()+", "+job.getLocationState()+": "+job.getLocationCostOfLivingIndex();
         job1Location.setText(loc);
         job1Title.setText(job.getTitle());
@@ -142,8 +139,8 @@ public class CompareOffersActivity extends AppCompatActivity {
         job1Gym.setText(String.valueOf(job.getGymAllowance()));
     }
     private void updateJob2Fields(Job job){
-        job2Salary.setText(String.valueOf(job.getSalary()));
-        job2Bonus.setText(String.valueOf(job.getBonus()));
+        job2Salary.setText(String.valueOf(job.getAYS()));
+        job2Bonus.setText(String.valueOf(job.getAYB()));
         String loc = job.getLocationCity()+", "+job.getLocationState()+": "+job.getLocationCostOfLivingIndex();
         job2Location.setText(loc);
         job2Title.setText(job.getTitle());

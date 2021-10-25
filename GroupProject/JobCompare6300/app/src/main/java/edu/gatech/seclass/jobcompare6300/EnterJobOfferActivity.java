@@ -112,17 +112,33 @@ public class EnterJobOfferActivity extends AppCompatActivity {
             allFieldsValid=false;
             titleField.setError("Please enter a job title before saving");
         }
+        if(title.length() > 128){
+            allFieldsValid=false;
+            titleField.setError("Please enter a Job Title under 128 characters");
+        }
         if(company.length() == 0){
             allFieldsValid=false;
             companyField.setError("Please enter a company before saving");
+        }
+        if(company.length() > 128){
+            allFieldsValid=false;
+            companyField.setError("Please enter a company name under 128 characters");
         }
         if(city.length() == 0){
             allFieldsValid=false;
             cityField.setError("Please enter a city before saving");
         }
+        if(city.length() > 128){
+            allFieldsValid=false;
+            cityField.setError("Please enter a city name under 128 characters");
+        }
         if(state.length()==0){
             allFieldsValid=false;
             stateField.setError("Please enter a state before saving");
+        }
+        if(state.length() > 128){
+            allFieldsValid=false;
+            stateField.setError("Please enter a state name under 128 characters");
         }
         try{
             int colIndex = Integer.parseInt(colField.getText().toString());
@@ -138,7 +154,7 @@ public class EnterJobOfferActivity extends AppCompatActivity {
 
         try{
             int salary = Integer.parseInt(salaryField.getText().toString());
-            if(salary<=0){
+            if(salary<0){
                 allFieldsValid=false;
                 salaryField.setError("Please enter a positive integer before saving");
             }
@@ -150,7 +166,7 @@ public class EnterJobOfferActivity extends AppCompatActivity {
 
         try{
             int bonus = Integer.parseInt(bonusField.getText().toString());
-            if(bonus<=0){
+            if(bonus<0){
                 allFieldsValid=false;
                 bonusField.setError("Please enter a positive integer before saving");
             }

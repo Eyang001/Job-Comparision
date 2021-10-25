@@ -1,6 +1,12 @@
-# Design Document (Version 2: Updated Section 4 UI graphical mockups)
+# Design Document (Version 3)
 
 **Author**: Team100
+
+## Change Log
+
+* Updated Section 4 UI graphical mockups (Oct. 23, 2021)
+* Revised Component Diagram where database connects to controller (Oct. 23, 2021)
+* Updated UML class diagram in Job, JobOffers, Controller classes (Oct. 23, 2021)
 
 ## 1 Design Considerations
 

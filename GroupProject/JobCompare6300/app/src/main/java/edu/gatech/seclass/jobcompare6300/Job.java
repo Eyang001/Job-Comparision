@@ -63,4 +63,12 @@ public class Job {
 
         return score;
     }
+
+    public int getAYS(){
+        return Math.round(this.getSalary() / (this.getLocationCostOfLivingIndex() / 100.0f));
+    }
+
+    public int getAYB(){
+        return Math.round(this.getBonus() / (this.getLocationCostOfLivingIndex() / 100.0f));
+    }
 }
