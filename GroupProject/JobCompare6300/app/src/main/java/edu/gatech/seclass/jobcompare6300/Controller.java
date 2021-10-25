@@ -58,7 +58,7 @@ public class Controller {
   
     public static Location getLocationByCityState(String city, String state){
         for (Location l: locations){
-            if(l.getCity() == city && l.getState()==state) return l;
+            if(l.getCity().equals(city) && l.getState().equals(state)) return l;
         }
         return null;
     }
